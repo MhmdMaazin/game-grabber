@@ -1,6 +1,6 @@
 # Overview
 
-GameFreebie Tracker is a retro-themed web application that displays real-time free game giveaways from various platforms like Steam, Epic Games, and GOG. The app features an 8-bit aesthetic with pixel fonts and neon colors, allowing users to browse, filter, and claim free games and digital content. It fetches data from the GamerPower API and provides filtering capabilities by platform, type (game/loot/beta), and sorting options.
+Game Grabber: GameFreebie Tracker is a retro-themed web application that displays real-time free game giveaways from various platforms like Steam, Epic Games, and GOG. The app features an 8-bit aesthetic with pixel fonts and neon colors, allowing users to browse, filter, and claim free games and digital content. It fetches data from the GamerPower API and provides filtering capabilities by platform, type (game/loot/beta), and sorting options.
 
 # User Preferences
 

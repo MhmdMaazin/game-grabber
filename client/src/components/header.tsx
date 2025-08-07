@@ -34,7 +34,7 @@ export default function Header() {
             </div>
             <div>
               <h1 className="text-white text-lg md:text-xl lg:text-2xl" data-testid="site-title">
-                PIXEL PASS
+                GAME GRABBER
               </h1>
               <p className="text-gray-400 text-xs hidden sm:block">FREE GAME TRACKER</p>
             </div>
