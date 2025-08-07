@@ -9,8 +9,9 @@
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/public"
-      }
+        "distDir": "client/dist"
+      },
+      "root": "client"
     }
   ],
   "routes": [
@@ -20,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/client/dist/$1"
     }
   ]
 }
