@@ -1,0 +1,75 @@
+🎁 Free Game Giveaway Tracker Website
+An 8-bit themed website that:
+
+Displays real-time giveaways from platforms like Steam, Epic Games, GOG, etc.
+
+Shows detailed info (game title, image, description, value, instructions, etc.)
+
+Filters by platform, type (game, loot, beta), and sorts by value or popularity.
+
+Uses pixel-style UI to match retro gamer aesthetics.
+
+Links each giveaway directly to the claim page.
+
+⚡ Example Prompt for Building This in React + Tailwind (8-bit Style)
+Prompt:
+"Build me a retro-styled 8-bit-themed website using React, TypeScript, Tailwind CSS, and 8bitcn(shadcn/ui) components. The website should use the GamerPower API to display current free games and giveaways. It should include:
+
+A home page that fetches all live giveaways from /api/giveaways
+
+Filters for platform (e.g., Steam, Epic Games) and type (game, loot, beta)
+
+Sort by value, date, or popularity
+
+Game cards styled with pixel fonts, borders, and 8-bit buttons
+
+A detail view for each giveaway using /api/giveaway?id={id}
+
+Responsive grid layout
+
+Attribution link to GamerPower.com
+
+Use fetch or Axios to get the data. Show loading states. Include a pixel-style logo and background."
+
+🧑‍💻 Example Project Plan
+Page	Description
+/	Home page – grid of giveaways from https://www.gamerpower.com/api/giveaways
+/game/[id]	Game detail page using https://www.gamerpower.com/api/giveaway?id={id}
+Filters	Dropdowns or buttons for platform, type, sort-by
+Theme	Use https://www.8bitcn.com or Tailwind’s retro look
+Hosting	Vercel, Netlify, Firebase Hosting
+
+🛠️ Basic API Usage Example (React)
+ts
+Copy
+Edit
+// Fetch all giveaways
+const res = await fetch("https://www.gamerpower.com/api/giveaways");
+const data = await res.json();
+ts
+Copy
+Edit
+// Fetch by platform
+const res = await fetch("https://www.gamerpower.com/api/giveaways?platform=steam");
+ts
+Copy
+Edit
+// Fetch specific game by ID
+const res = await fetch("https://www.gamerpower.com/api/giveaway?id=525");
+🧩 Components You Can Build
+<GiveawayCard /> – image, title, short description, button to claim
+
+<Filters /> – platform, type, sort
+
+<GameDetail /> – long instructions, expiration, status
+
+<PixelButton /> – stylized 8-bit style buttons
+
+<Attribution /> – "Powered by GamerPower.com" link
+
+🎨 Design Inspiration (8-Bit)
+Use "Press Start 2P" font (Google Fonts)
+
+Add pixelated UI elements using 8bitcn or Tailwind
+
+Use hover sound effects and chiptune music if you like
