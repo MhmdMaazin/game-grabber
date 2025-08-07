@@ -59,15 +59,8 @@ export default function Trending() {
   const maxUsers = giveaways && giveaways.length > 0 ? giveaways.reduce((max, g) => Math.max(max, g.users), 0) : 0;
 
 
-  const topGiveaways = giveaways?.reduce((acc, giveaway) => {
-    const value = parseFloat(giveaway.worth.replace(/[^0-9.]/g, ''));
-    if (value > 0) {
-      acc.push({ ...giveaway, numericValue: value });
-    }
-    return acc;
-  }, [] as Array<any>)
-    ?.sort((a, b) => b.numericValue - a.numericValue)
-    ?.slice(0, 10) || [];
+  // Get top giveaways based on selected sort criteria
+  const topGiveaways = sortedGiveaways.slice(0, 12);
 
   if (giveawaysLoading || statsLoading) {
     return (
