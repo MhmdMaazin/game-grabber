@@ -100,6 +100,49 @@ SESSION_SECRET=your_session_secret_here
 - **Authentication**: Passport.js
 - **Styling**: Tailwind CSS with custom components
 
+## Vercel Deployment
+
+### ✅ Yes, this project can be hosted on Vercel!
+
+This project has been configured for Vercel deployment with:
+- **Frontend**: Static React app (client/dist)
+- **Backend**: Serverless API functions (api/index.js)
+- **API routes**: Mock endpoints for development
+
+### 🚀 Deploy to Vercel
+
+1. **Install Vercel CLI**:
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Deploy**:
+   ```bash
+   vercel --prod
+   ```
+
+3. **Alternative**: Connect your GitHub repository to Vercel dashboard for automatic deployments
+
+### 📁 Vercel Configuration Files
+
+- `vercel.json`: Vercel deployment configuration
+- `api/index.js`: Serverless API function
+- `client/dist/`: Static React build output
+
+### 🔄 API Endpoints (Vercel)
+
+When deployed to Vercel, these endpoints will be available:
+- `GET /api/health` - Health check
+- `GET /api/games` - Games data
+- `GET /api/giveaways` - Giveaways data
+
+### 📝 Notes for Production
+
+- The current API endpoints are mock data for demonstration
+- For production use, integrate with your actual database
+- Consider using Vercel's Edge Functions for better performance
+- Environment variables can be set in Vercel dashboard
+
 ## Windows Compatibility
 
 This project has been configured to work seamlessly on Windows with:
