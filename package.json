@@ -13,7 +13,7 @@
     "client:build": "vite build",
     "client:preview": "vite preview",
     "dev:full": "concurrently \"npm run client:dev\" \"npm run dev\"",
-    "vercel-build": "npm run client:build"
+    "vercel-build": "npm run client:build && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
