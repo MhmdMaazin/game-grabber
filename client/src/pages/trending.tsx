@@ -44,20 +44,20 @@ export default function Trending() {
   });
 
   // Sort giveaways based on selected criteria
-  const sortedGiveaways = [...giveaways].sort((a, b) => {
-    switch (sortBy) {
-      case 'popularity':
-        return (b.users || 0) - (a.users || 0);
-      case 'value':
-        const aValue = parseFloat(a.worth.replace(/[^0-9.]/g, '')) || 0;
-        const bValue = parseFloat(b.worth.replace(/[^0-9.]/g, '')) || 0;
-        return bValue - aValue;
-      case 'date':
-        return new Date(b.published_date).getTime() - new Date(a.published_date).getTime();
-      default:
-        return 0;
+  const sortedGiveaways = giveaways ? [...giveaways].sort((a, b) => {
+    if (sortBy === 'popularity') {
+      return b.users - a.users;
+    } else if (sortBy === 'value') {
+      const aValue = parseFloat(a.worth.replace(/[^0-9.]/g, '')) || 0;
+      const bValue = parseFloat(b.worth.replace(/[^0-9.]/g, '')) || 0;
+      return bValue - aValue;
+    } else {
+      return new Date(b.published_date).getTime() - new Date(a.published_date).getTime();
     }
-  });
+  }) : [];
+
+  const maxUsers = giveaways && giveaways.length > 0 ? giveaways.reduce((max, g) => Math.max(max, g.users), 0) : 0;
+
 
   const topGiveaways = sortedGiveaways.slice(0, 12);
 
@@ -81,7 +81,7 @@ export default function Trending() {
   return (
     <div className="min-h-screen bg-dark-bg">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-8">
@@ -107,7 +107,7 @@ export default function Trending() {
               <div className="text-white text-lg font-bold">{stats?.totalGiveaways || 0}</div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-dark-secondary border-gray-600">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs flex items-center gap-1">
@@ -119,7 +119,7 @@ export default function Trending() {
               <div className="text-green-500 text-lg font-bold">${stats?.totalValue || '0'}</div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-dark-secondary border-gray-600">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs flex items-center gap-1">
@@ -133,7 +133,7 @@ export default function Trending() {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="bg-dark-secondary border-gray-600">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs">HOT TYPE</CardTitle>
@@ -199,7 +199,7 @@ export default function Trending() {
           </div>
         )}
       </main>
-      
+
       <Footer />
     </div>
   );

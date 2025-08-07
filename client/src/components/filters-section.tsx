@@ -50,7 +50,7 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
               data-testid="input-search"
             />
           </div>
-          
+
           {/* Platform Filter */}
           <div>
             <label className="block text-white text-xs mb-2">PLATFORM</label>
@@ -71,7 +71,7 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
               </SelectContent>
             </Select>
           </div>
-          
+
           {/* Sort By */}
           <div>
             <label className="block text-white text-xs mb-2">SORT BY</label>
@@ -90,7 +90,7 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
             </Select>
           </div>
         </div>
-        
+
         {/* Filter Tags */}
         <div className="flex flex-wrap gap-2 mt-6">
           <span className="text-gray-300 text-xs">FILTER BY TYPE:</span>
