@@ -1,15 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import type { GiveawayStats } from "@/lib/types";
 
 export default function HeroSection() {
   const { data: stats, isLoading } = useQuery<GiveawayStats>({
     queryKey: ['/api/stats'],
-  });
-
-  const { data: worthData } = useQuery<{active_giveaways_number: number, worth_estimation_usd: number}>({
-    queryKey: ['/api/worth'],
   });
 
   return (
@@ -30,57 +24,30 @@ export default function HeroSection() {
           CLAIM YOUR DIGITAL TREASURES
         </p>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          <div className="bg-dark-tertiary border-2 border-neon-green p-4 relative overflow-hidden">
-            <div className="text-2xl text-neon-yellow mb-2" data-testid="stat-total">
-              {isLoading ? (
-                <Progress value={33} className="w-full h-6 bg-dark-bg" />
-              ) : (
-                worthData?.active_giveaways_number || stats?.totalGiveaways || 0
-              )}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+          <div className="bg-dark-tertiary border-2 border-neon-green p-4">
+            <div className="text-2xl text-neon-yellow" data-testid="stat-total">
+              {isLoading ? "..." : stats?.totalGiveaways || 0}
             </div>
-            <Badge variant="secondary" className="text-neon-cyan bg-dark-bg border border-neon-cyan text-xs">
-              ACTIVE GAMES
-            </Badge>
+            <div className="text-xs text-neon-cyan">ACTIVE</div>
           </div>
-          
-          <div className="bg-dark-tertiary border-2 border-neon-pink p-4 relative overflow-hidden">
-            <div className="text-2xl text-neon-yellow mb-2" data-testid="stat-value">
-              {isLoading ? (
-                <Progress value={66} className="w-full h-6 bg-dark-bg" />
-              ) : (
-                `$${Math.round(worthData?.worth_estimation_usd || stats?.totalValue || 0)}`
-              )}
+          <div className="bg-dark-tertiary border-2 border-neon-pink p-4">
+            <div className="text-2xl text-neon-yellow" data-testid="stat-value">
+              {isLoading ? "..." : `$${Math.round(stats?.totalValue || 0)}`}
             </div>
-            <Badge variant="secondary" className="text-neon-pink bg-dark-bg border border-neon-pink text-xs">
-              TOTAL WORTH
-            </Badge>
+            <div className="text-xs text-neon-cyan">VALUE</div>
           </div>
-          
-          <div className="bg-dark-tertiary border-2 border-neon-purple p-4 relative overflow-hidden">
-            <div className="text-2xl text-neon-yellow mb-2" data-testid="stat-platforms">
-              {isLoading ? (
-                <Progress value={80} className="w-full h-6 bg-dark-bg" />
-              ) : (
-                stats?.platforms || 0
-              )}
+          <div className="bg-dark-tertiary border-2 border-neon-purple p-4">
+            <div className="text-2xl text-neon-yellow" data-testid="stat-platforms">
+              {isLoading ? "..." : stats?.platforms || 0}
             </div>
-            <Badge variant="secondary" className="text-neon-purple bg-dark-bg border border-neon-purple text-xs">
-              PLATFORMS
-            </Badge>
+            <div className="text-xs text-neon-cyan">PLATFORMS</div>
           </div>
-          
-          <div className="bg-dark-tertiary border-2 border-neon-yellow p-4 relative overflow-hidden">
-            <div className="text-2xl text-neon-yellow mb-2" data-testid="stat-new-today">
-              {isLoading ? (
-                <Progress value={45} className="w-full h-6 bg-dark-bg" />
-              ) : (
-                stats?.newToday || 0
-              )}
+          <div className="bg-dark-tertiary border-2 border-neon-yellow p-4">
+            <div className="text-2xl text-neon-yellow" data-testid="stat-new-today">
+              {isLoading ? "..." : stats?.newToday || 0}
             </div>
-            <Badge variant="secondary" className="text-neon-yellow bg-dark-bg border border-neon-yellow text-xs">
-              NEW TODAY
-            </Badge>
+            <div className="text-xs text-neon-cyan">NEW TODAY</div>
           </div>
         </div>
       </div>

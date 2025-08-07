@@ -1,8 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import type { FilterState } from "@/lib/types";
 
 interface FiltersSectionProps {
@@ -93,53 +91,49 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
           </div>
         </div>
         
-        {/* Enhanced Filter Tabs */}
-        <div className="mt-6">
-          <Tabs value={filters.type || 'all'} onValueChange={(value) => onFiltersChange({ ...filters, type: value })} className="w-full">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
-                <Badge className="text-neon-cyan bg-dark-bg border border-neon-cyan">FILTER BY TYPE:</Badge>
-                <TabsList className="bg-dark-bg border-2 border-neon-green">
-                  <TabsTrigger 
-                    value="all" 
-                    className="data-[state=active]:bg-neon-green data-[state=active]:text-dark-bg text-white"
-                    data-testid="filter-all"
-                  >
-                    ALL
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="game" 
-                    className="data-[state=active]:bg-neon-green data-[state=active]:text-dark-bg text-white"
-                    data-testid="filter-game"
-                  >
-                    GAMES
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="loot" 
-                    className="data-[state=active]:bg-neon-pink data-[state=active]:text-dark-bg text-white"
-                    data-testid="filter-loot"
-                  >
-                    LOOT
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="beta" 
-                    className="data-[state=active]:bg-neon-purple data-[state=active]:text-white text-white"
-                    data-testid="filter-beta"
-                  >
-                    BETA
-                  </TabsTrigger>
-                </TabsList>
-              </div>
-              <Button
-                variant="outline"
-                className="border-2 border-neon-yellow text-neon-yellow hover:bg-neon-yellow hover:text-dark-bg text-xs retro-button"
-                onClick={clearFilters}
-                data-testid="button-clear-filters"
-              >
-                CLEAR ALL
-              </Button>
-            </div>
-          </Tabs>
+        {/* Filter Tags */}
+        <div className="flex flex-wrap gap-2 mt-6">
+          <span className="text-neon-cyan text-xs">FILTER BY TYPE:</span>
+          <Button
+            className={`px-3 py-1 text-xs retro-button ${
+              filters.type === 'game' 
+                ? 'bg-neon-green text-dark-bg' 
+                : 'border border-neon-green text-neon-green hover:bg-neon-green hover:text-dark-bg'
+            }`}
+            onClick={() => handleTypeFilter('game')}
+            data-testid="filter-game"
+          >
+            GAMES
+          </Button>
+          <Button
+            className={`px-3 py-1 text-xs retro-button ${
+              filters.type === 'loot' 
+                ? 'bg-neon-pink text-dark-bg' 
+                : 'border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-dark-bg'
+            }`}
+            onClick={() => handleTypeFilter('loot')}
+            data-testid="filter-loot"
+          >
+            LOOT
+          </Button>
+          <Button
+            className={`px-3 py-1 text-xs retro-button ${
+              filters.type === 'beta' 
+                ? 'bg-neon-purple text-white' 
+                : 'border border-neon-purple text-neon-purple hover:bg-neon-purple hover:text-white'
+            }`}
+            onClick={() => handleTypeFilter('beta')}
+            data-testid="filter-beta"
+          >
+            BETA ACCESS
+          </Button>
+          <Button
+            className="px-3 py-1 border border-neon-yellow text-neon-yellow hover:bg-neon-yellow hover:text-dark-bg text-xs retro-button"
+            onClick={clearFilters}
+            data-testid="button-clear-filters"
+          >
+            CLEAR ALL
+          </Button>
         </div>
       </div>
     </section>

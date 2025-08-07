@@ -93,40 +93,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get total worth from GamerPower API
-  app.get("/api/worth", async (req, res) => {
-    try {
-      const { platform, type } = req.query;
-      let apiUrl = `${GAMERPOWER_BASE_URL}/worth`;
-      const params = new URLSearchParams();
-      
-      if (platform && typeof platform === 'string') {
-        params.append('platform', platform);
-      }
-      if (type && typeof type === 'string') {
-        params.append('type', type);
-      }
-      
-      if (params.toString()) {
-        apiUrl += `?${params.toString()}`;
-      }
-
-      const response = await fetch(apiUrl);
-      if (!response.ok) {
-        throw new Error(`GamerPower API error: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error('Error fetching worth:', error);
-      res.status(500).json({ 
-        error: 'Failed to fetch worth data',
-        message: error instanceof Error ? error.message : 'Unknown error'
-      });
-    }
-  });
-
   // Get giveaway statistics
   app.get("/api/stats", async (req, res) => {
     try {
