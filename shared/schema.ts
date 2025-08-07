@@ -7,8 +7,8 @@ export const giveawaySchema = z.object({
   thumbnail: z.string(),
   image: z.string(),
   description: z.string(),
-  instructions: z.string(),
-  open_giveaway_url: z.string(),
+  instructions: z.string().optional(),
+  open_giveaway_url: z.string().optional(),
   published_date: z.string(),
   type: z.string(),
   platforms: z.string(),
@@ -16,7 +16,7 @@ export const giveawaySchema = z.object({
   users: z.number(),
   status: z.string(),
   gamerpower_url: z.string(),
-  open_giveaway: z.string(),
+  open_giveaway: z.string().optional(),
 });
 
 export const giveawaysResponseSchema = z.array(giveawaySchema);
