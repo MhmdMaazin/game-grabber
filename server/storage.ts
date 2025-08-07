@@ -6,11 +6,16 @@ export interface IStorage {
   setCachedGiveaways(giveaways: Giveaway[]): Promise<void>;
   getCacheTimestamp(): Promise<number | null>;
   setCacheTimestamp(timestamp: number): Promise<void>;
+  
+  // Filter-based caching
+  getCachedGiveawaysByKey(key: string): Promise<Giveaway[] | null>;
+  setCachedGiveawaysByKey(key: string, giveaways: Giveaway[]): Promise<void>;
 }
 
 export class MemStorage implements IStorage {
   private giveawaysCache: Giveaway[] | null = null;
   private cacheTimestamp: number | null = null;
+  private filterCache: Map<string, { data: Giveaway[], timestamp: number }> = new Map();
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
   async getCachedGiveaways(): Promise<Giveaway[] | null> {
@@ -34,6 +39,26 @@ export class MemStorage implements IStorage {
 
   async setCacheTimestamp(timestamp: number): Promise<void> {
     this.cacheTimestamp = timestamp;
+  }
+
+  async getCachedGiveawaysByKey(key: string): Promise<Giveaway[] | null> {
+    const cached = this.filterCache.get(key);
+    if (!cached) return null;
+    
+    const now = Date.now();
+    if (now - cached.timestamp > this.CACHE_DURATION) {
+      this.filterCache.delete(key);
+      return null;
+    }
+    
+    return cached.data;
+  }
+
+  async setCachedGiveawaysByKey(key: string, giveaways: Giveaway[]): Promise<void> {
+    this.filterCache.set(key, {
+      data: giveaways,
+      timestamp: Date.now()
+    });
   }
 }
 

@@ -12,10 +12,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const filters = filterSchema.parse(req.query);
       
-      // Check cache first
-      const cachedGiveaways = await storage.getCachedGiveaways();
-      if (cachedGiveaways) {
-        const filteredGiveaways = applyFilters(cachedGiveaways, filters);
+      // Build cache key based on filters
+      const cacheKey = JSON.stringify(filters);
+      const cachedData = await storage.getCachedGiveawaysByKey(cacheKey);
+      
+      if (cachedData) {
+        const filteredGiveaways = applyClientSideFilters(cachedData, filters);
         return res.json(filteredGiveaways);
       }
 
@@ -23,12 +25,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let apiUrl = `${GAMERPOWER_BASE_URL}/giveaways`;
       const params = new URLSearchParams();
       
-      if (filters.platform) {
-        params.append('platform', filters.platform);
+      // Map platform filter to correct API values
+      if (filters.platform && filters.platform !== 'all') {
+        let platformParam = filters.platform;
+        // Map frontend platform values to API values
+        const platformMap: Record<string, string> = {
+          'steam': 'steam',
+          'epic-games-store': 'epic-games-store',
+          'gog': 'gog',
+          'ubisoft': 'ubisoft',
+          'origin': 'origin'
+        };
+        platformParam = platformMap[filters.platform] || filters.platform;
+        params.append('platform', platformParam);
       }
-      if (filters.type) {
+      
+      if (filters.type && filters.type !== 'all') {
         params.append('type', filters.type);
       }
+      
+      // Sort parameter mapping
       if (filters.sort === 'value') {
         params.append('sort-by', 'value');
       } else if (filters.sort === 'popularity') {
@@ -39,20 +55,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
         apiUrl += `?${params.toString()}`;
       }
 
-      const response = await fetch(apiUrl);
+      console.log(`Fetching from GamerPower API: ${apiUrl}`);
+      const response = await fetch(apiUrl, {
+        headers: {
+          'User-Agent': 'Pixel Pass Giveaway Tracker'
+        }
+      });
       
       if (!response.ok) {
         throw new Error(`GamerPower API error: ${response.status} ${response.statusText}`);
       }
 
       const data = await response.json();
+      
+      // Handle both array response and error object
+      if (!Array.isArray(data)) {
+        if (data.status_code) {
+          throw new Error(`API Error: ${data.error_message || 'Unknown error'}`);
+        }
+        // If it's not an array and not an error, wrap it
+        const giveaways = Array.isArray(data) ? data : [data];
+        const validatedGiveaways = giveawaysResponseSchema.parse(giveaways);
+        
+        await storage.setCachedGiveawaysByKey(cacheKey, validatedGiveaways);
+        const filteredGiveaways = applyClientSideFilters(validatedGiveaways, filters);
+        return res.json(filteredGiveaways);
+      }
+      
       const giveaways = giveawaysResponseSchema.parse(data);
 
-      // Cache the results
-      await storage.setCachedGiveaways(giveaways);
-      await storage.setCacheTimestamp(Date.now());
-
-      const filteredGiveaways = applyFilters(giveaways, filters);
+      // Cache the results with filters as key
+      await storage.setCachedGiveawaysByKey(cacheKey, giveaways);
+      
+      const filteredGiveaways = applyClientSideFilters(giveaways, filters);
       res.json(filteredGiveaways);
     } catch (error) {
       console.error('Error fetching giveaways:', error);
@@ -93,13 +128,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get giveaway statistics
+  // Get giveaway statistics using worth API endpoint
   app.get("/api/stats", async (req, res) => {
     try {
+      // Use the worth API endpoint for total value
+      const worthResponse = await fetch(`${GAMERPOWER_BASE_URL}/worth`, {
+        headers: {
+          'User-Agent': 'Pixel Pass Giveaway Tracker'
+        }
+      });
+      
+      let worthData = null;
+      if (worthResponse.ok) {
+        worthData = await worthResponse.json();
+      }
+
+      // Get all giveaways for other stats
       let giveaways = await storage.getCachedGiveaways();
       
       if (!giveaways) {
-        const response = await fetch(`${GAMERPOWER_BASE_URL}/giveaways`);
+        const response = await fetch(`${GAMERPOWER_BASE_URL}/giveaways`, {
+          headers: {
+            'User-Agent': 'Pixel Pass Giveaway Tracker'
+          }
+        });
         if (!response.ok) {
           throw new Error(`GamerPower API error: ${response.status} ${response.statusText}`);
         }
@@ -111,8 +163,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const stats = {
-        totalGiveaways: giveaways.length,
-        totalValue: giveaways.reduce((sum, g) => {
+        totalGiveaways: worthData?.active_giveaways_number || giveaways.length,
+        totalValue: worthData?.worth_estimation_usd || giveaways.reduce((sum, g) => {
           const value = parseFloat(g.worth.replace('$', '').replace('N/A', '0'));
           return sum + (isNaN(value) ? 0 : value);
         }, 0),
@@ -134,11 +186,80 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get total worth estimation from GamerPower API
+  app.get("/api/worth", async (req, res) => {
+    try {
+      const response = await fetch(`${GAMERPOWER_BASE_URL}/worth`, {
+        headers: {
+          'User-Agent': 'Pixel Pass Giveaway Tracker'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`GamerPower API error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      res.json(data);
+    } catch (error) {
+      console.error('Error fetching worth data:', error);
+      res.status(500).json({ 
+        error: 'Failed to fetch worth estimation',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // Filter & group platforms and giveaway types - using GamerPower filter API
+  app.get("/api/filter", async (req, res) => {
+    try {
+      const { platform, type } = req.query;
+      
+      if (!platform && !type) {
+        return res.status(400).json({ 
+          error: 'At least one filter parameter (platform or type) is required' 
+        });
+      }
+
+      const params = new URLSearchParams();
+      if (platform) {
+        params.append('platform', platform as string);
+      }
+      if (type) {
+        params.append('type', type as string);
+      }
+
+      const apiUrl = `${GAMERPOWER_BASE_URL}/filter?${params.toString()}`;
+      console.log(`Fetching filtered giveaways: ${apiUrl}`);
+      
+      const response = await fetch(apiUrl, {
+        headers: {
+          'User-Agent': 'Pixel Pass Giveaway Tracker'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`GamerPower API error: ${response.status} ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      const giveaways = giveawaysResponseSchema.parse(data);
+      
+      res.json(giveaways);
+    } catch (error) {
+      console.error('Error fetching filtered giveaways:', error);
+      res.status(500).json({ 
+        error: 'Failed to fetch filtered giveaways',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
 
-function applyFilters(giveaways: any[], filters: any) {
+function applyClientSideFilters(giveaways: any[], filters: any) {
   let filtered = [...giveaways];
 
   // Apply search filter
