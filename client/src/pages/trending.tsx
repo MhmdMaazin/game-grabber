@@ -137,7 +137,9 @@ export default function Trending() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-white text-sm font-bold">
-                {stats?.platforms ? Object.entries(stats.platforms).reduce((a, b) => a[1] > b[1] ? a : b)[0].toUpperCase() : 'STEAM'}
+                {stats?.platforms && Object.keys(stats.platforms).length > 0 
+                  ? Object.entries(stats.platforms).reduce((a, b) => a[1] > b[1] ? a : b)[0].toUpperCase() 
+                  : 'STEAM'}
               </div>
             </CardContent>
           </Card>
@@ -148,7 +150,9 @@ export default function Trending() {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-white text-sm font-bold">
-                {stats?.types ? Object.entries(stats.types).reduce((a, b) => a[1] > b[1] ? a : b)[0].toUpperCase() : 'GAME'}
+                {stats?.types && Object.keys(stats.types).length > 0 
+                  ? Object.entries(stats.types).reduce((a, b) => a[1] > b[1] ? a : b)[0].toUpperCase() 
+                  : 'GAME'}
               </div>
             </CardContent>
           </Card>
