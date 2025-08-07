@@ -1,7 +1,6 @@
 import { useRoute, Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BitButton } from "@/components/ui/8bit-button";
-import { BitBadge } from "@/components/ui/8bit-badge";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Calendar, Users, Tag } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -40,10 +39,13 @@ export default function GiveawayDetails() {
         {/* Back Button */}
         <div className="mb-8">
           <Link href="/">
-            <BitButton variant="outline" data-testid="button-back">
+            <Button 
+              className="flex items-center gap-2 bg-dark-secondary border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-dark-bg retro-button"
+              data-testid="button-back"
+            >
               <ArrowLeft size={16} />
               BACK TO GIVEAWAYS
-            </BitButton>
+            </Button>
           </Link>
         </div>
 
@@ -84,36 +86,35 @@ export default function GiveawayDetails() {
                 />
                 <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
                   {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
-                    <BitBadge variant="outline" className="bg-gray-600 text-white line-through text-sm">
+                    <div className="bg-gray-600 text-white px-3 py-2 text-sm line-through">
                       {giveaway.worth}
-                    </BitBadge>
+                    </div>
                   )}
-                  <BitBadge variant="free" className="text-lg">
+                  <div className="bg-neon-green text-dark-bg px-3 py-2 text-lg font-bold animate-pixel-pulse">
                     FREE
-                  </BitBadge>
+                  </div>
                 </div>
               </div>
 
               {/* Quick Actions */}
               <div className="flex gap-4">
-                <BitButton
-                  variant="neon"
-                  className="flex-1"
+                <Button
                   onClick={handleClaimClick}
+                  className="flex-1 bg-neon-green text-dark-bg hover:bg-neon-cyan text-sm py-3 retro-button"
                   data-testid="button-claim-main"
                 >
                   <ExternalLink size={16} className="mr-2" />
                   {giveaway.type.toLowerCase() === 'beta' ? 'JOIN BETA' : 'CLAIM NOW'}
-                </BitButton>
+                </Button>
                 
                 {giveaway.gamerpower_url && (
-                  <BitButton
-                    variant="secondary"
+                  <Button
                     onClick={() => window.open(giveaway.gamerpower_url, '_blank', 'noopener,noreferrer')}
+                    className="border-2 border-neon-yellow text-neon-yellow hover:bg-neon-yellow hover:text-dark-bg retro-button text-sm py-3"
                     data-testid="button-view-more"
                   >
                     VIEW MORE
-                  </BitButton>
+                  </Button>
                 )}
               </div>
             </div>
