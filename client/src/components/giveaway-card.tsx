@@ -9,12 +9,12 @@ interface GiveawayCardProps {
 export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
   const formatEndDate = (endDate: string | null) => {
     if (!endDate || endDate === "N/A") return "No expiration";
-    
+
     const end = new Date(endDate);
     const now = new Date();
     const diffTime = end.getTime() - now.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays < 0) return "Expired";
     if (diffDays === 0) return "Ends today";
     if (diffDays === 1) return "Ends tomorrow";
@@ -24,48 +24,57 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
 
   const getBorderColor = (type: string) => {
     switch (type.toLowerCase()) {
-      case 'loot': return 'border-gray-600';
-      case 'beta': return 'border-gray-600';
-      default: return 'border-gray-600';
+      case "loot":
+        return "border-gray-600";
+      case "beta":
+        return "border-gray-600";
+      default:
+        return "border-gray-600";
     }
   };
 
   const getButtonColor = (type: string) => {
     switch (type.toLowerCase()) {
-      case 'loot': return 'bg-gray-700 text-white hover:bg-gray-600';
-      case 'beta': return 'bg-gray-700 text-white hover:bg-gray-600';
-      default: return 'bg-gray-700 text-white hover:bg-gray-600';
+      case "loot":
+        return "bg-gray-700 text-white hover:bg-gray-600";
+      case "beta":
+        return "bg-gray-700 text-white hover:bg-gray-600";
+      default:
+        return "bg-gray-700 text-white hover:bg-gray-600";
     }
   };
 
   const getPlatformColor = (platform: string) => {
     const platformLower = platform.toLowerCase();
-    if (platformLower.includes('steam')) return 'bg-gray-600 text-white';
-    if (platformLower.includes('epic')) return 'bg-gray-600 text-white';
-    if (platformLower.includes('gog')) return 'bg-gray-600 text-white';
-    return 'bg-gray-600 text-white';
+    if (platformLower.includes("steam")) return "bg-gray-600 text-white";
+    if (platformLower.includes("epic")) return "bg-gray-600 text-white";
+    if (platformLower.includes("gog")) return "bg-gray-600 text-white";
+    return "bg-gray-600 text-white";
   };
 
   const handleClaimClick = () => {
     if (giveaway.open_giveaway_url) {
-      window.open(giveaway.open_giveaway_url, '_blank', 'noopener,noreferrer');
+      window.open(giveaway.open_giveaway_url, "_blank", "noopener,noreferrer");
     }
   };
 
   return (
-    <div className={`bg-dark-secondary border ${getBorderColor(giveaway.type)} hover:border-gray-500 transition-all duration-300 group cursor-pointer`}>
-      <div 
-        onClick={() => window.location.href = `/giveaway/${giveaway.id}`}
+    <div
+      className={`bg-dark-secondary border ${getBorderColor(giveaway.type)} hover:border-gray-500 transition-all duration-300 group cursor-pointer`}
+    >
+      <div
+        onClick={() => (window.location.href = `/giveaway/${giveaway.id}`)}
         className="block"
       >
         <div className="relative overflow-hidden aspect-video">
-          <img 
-            src={giveaway.image || giveaway.thumbnail} 
+          <img
+            src={giveaway.image || giveaway.thumbnail}
             alt={giveaway.title}
             className="w-full h-full object-contain bg-gray-900 group-hover:scale-105 transition-transform duration-300"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = 'https://via.placeholder.com/400x300/1a1a1a/ffffff?text=No+Image';
+              target.src =
+                "https://via.placeholder.com/400x300/1a1a1a/ffffff?text=No+Image";
             }}
           />
           <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
@@ -78,33 +87,41 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
               FREE
             </div>
           </div>
-          <div className={`absolute top-2 left-2 px-2 py-1 text-xs ${getPlatformColor(giveaway.platforms)}`}>
-            {giveaway.platforms.split(',')[0].trim().toUpperCase()}
+          <div
+            className={`absolute top-2 left-2 px-2 py-1 text-xs ${getPlatformColor(giveaway.platforms)}`}
+          >
+            {giveaway.platforms.split(",")[0].trim().toUpperCase()}
           </div>
         </div>
-        
+
         <div className="p-4 pb-2">
-          <h3 
-            className="text-white text-sm mb-2 truncate hover:text-gray-300 transition-colors" 
+          <h3
+            className="text-white text-sm mb-2 truncate hover:text-gray-300 transition-colors"
             data-testid={`title-${giveaway.id}`}
           >
             {giveaway.title}
           </h3>
-          <p className="text-gray-400 text-xs mb-3 line-clamp-2" data-testid={`description-${giveaway.id}`}>
+          <p
+            className="text-red-400 text-xs mb-3 line-clamp-2"
+            data-testid={`description-${giveaway.id}`}
+          >
             {giveaway.description}
           </p>
-          
+
           <div className="flex justify-between items-center text-xs mb-3">
             <span className="text-gray-300" data-testid={`type-${giveaway.id}`}>
               {giveaway.type}
             </span>
-            <span className="text-gray-400" data-testid={`end-date-${giveaway.id}`}>
+            <span
+              className="text-red-400"
+              data-testid={`end-date-${giveaway.id}`}
+            >
               {formatEndDate(giveaway.end_date)}
             </span>
           </div>
         </div>
       </div>
-      
+
       {/* Claim button positioned normally but with event handling to prevent card navigation */}
       <div className="px-4 pb-4">
         <Button
@@ -116,7 +133,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
           }}
           data-testid={`button-claim-${giveaway.id}`}
         >
-          {giveaway.type.toLowerCase() === 'beta' ? 'JOIN BETA' : 'CLAIM NOW'}
+          {giveaway.type.toLowerCase() === "beta" ? "JOIN BETA" : "CLAIM NOW"}
         </Button>
       </div>
     </div>
