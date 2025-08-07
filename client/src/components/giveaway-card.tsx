@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
+import { BitButton } from "@/components/ui/8bit-button";
+import { BitBadge } from "@/components/ui/8bit-badge";
 import type { Giveaway } from "@shared/schema";
 
 interface GiveawayCardProps {
@@ -70,17 +71,17 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
           />
           <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
             {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
-              <div className="bg-gray-600 text-white px-2 py-1 text-xs line-through">
+              <BitBadge variant="outline" className="bg-gray-600 text-white line-through">
                 {giveaway.worth}
-              </div>
+              </BitBadge>
             )}
-            <div className="bg-neon-green text-dark-bg px-2 py-1 text-xs font-bold animate-pixel-pulse">
+            <BitBadge variant="free">
               FREE
-            </div>
+            </BitBadge>
           </div>
-          <div className={`absolute top-2 left-2 px-2 py-1 text-xs ${getPlatformColor(giveaway.platforms)}`}>
+          <BitBadge variant="secondary" className={`absolute top-2 left-2 ${getPlatformColor(giveaway.platforms)}`}>
             {giveaway.platforms.split(',')[0].trim().toUpperCase()}
-          </div>
+          </BitBadge>
         </div>
         
         <div className="p-4 pb-2">
@@ -107,8 +108,10 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
       
       {/* Claim button positioned normally but with event handling to prevent card navigation */}
       <div className="px-4 pb-4">
-        <Button
-          className={`w-full py-2 px-4 transition-colors retro-button text-xs ${getButtonColor(giveaway.type)}`}
+        <BitButton
+          variant={giveaway.type.toLowerCase() === 'beta' ? 'destructive' : 'neon'}
+          size="sm"
+          className="w-full"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -117,7 +120,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
           data-testid={`button-claim-${giveaway.id}`}
         >
           {giveaway.type.toLowerCase() === 'beta' ? 'JOIN BETA' : 'CLAIM NOW'}
-        </Button>
+        </BitButton>
       </div>
     </div>
   );

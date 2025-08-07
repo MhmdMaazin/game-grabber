@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { BitButton } from "@/components/ui/8bit-button";
 
 export default function Header() {
   return (
@@ -19,25 +20,16 @@ export default function Header() {
           
           <nav className="flex flex-wrap gap-2 text-xs">
             <Link href="/">
-              <button 
-                className="px-4 py-2 bg-neon-pink text-dark-bg hover:neon-glow transition-all retro-button"
-                data-testid="nav-home"
-              >
+              <BitButton variant="neon" size="sm" data-testid="nav-home">
                 HOME
-              </button>
+              </BitButton>
             </Link>
-            <button 
-              className="px-4 py-2 border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-dark-bg transition-all retro-button"
-              data-testid="nav-trending"
-            >
+            <BitButton variant="outline" size="sm" data-testid="nav-trending">
               TRENDING
-            </button>
-            <button 
-              className="px-4 py-2 border-2 border-neon-yellow text-neon-yellow hover:bg-neon-yellow hover:text-dark-bg transition-all retro-button"
-              data-testid="nav-about"
-            >
+            </BitButton>
+            <BitButton variant="secondary" size="sm" data-testid="nav-about">
               ABOUT
-            </button>
+            </BitButton>
           </nav>
         </div>
       </div>

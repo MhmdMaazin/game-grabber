@@ -1,6 +1,6 @@
-import { Input } from "@/components/ui/input";
+import { BitInput } from "@/components/ui/8bit-input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+import { BitButton } from "@/components/ui/8bit-button";
 import type { FilterState } from "@/lib/types";
 
 interface FiltersSectionProps {
@@ -41,9 +41,8 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
           {/* Search */}
           <div className="md:col-span-2">
             <label className="block text-neon-green text-xs mb-2">SEARCH GAMES</label>
-            <Input
+            <BitInput
               type="text"
-              className="w-full px-4 py-3 bg-dark-bg border-2 border-neon-green text-white placeholder-gray-500 focus:border-neon-cyan focus:outline-none retro-button text-xs"
               placeholder="Enter game title..."
               value={filters.search}
               onChange={(e) => handleSearchChange(e.target.value)}
@@ -94,46 +93,38 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
         {/* Filter Tags */}
         <div className="flex flex-wrap gap-2 mt-6">
           <span className="text-neon-cyan text-xs">FILTER BY TYPE:</span>
-          <Button
-            className={`px-3 py-1 text-xs retro-button ${
-              filters.type === 'game' 
-                ? 'bg-neon-green text-dark-bg' 
-                : 'border border-neon-green text-neon-green hover:bg-neon-green hover:text-dark-bg'
-            }`}
+          <BitButton
+            variant={filters.type === 'game' ? 'default' : 'outline'}
+            size="sm"
             onClick={() => handleTypeFilter('game')}
             data-testid="filter-game"
           >
             GAMES
-          </Button>
-          <Button
-            className={`px-3 py-1 text-xs retro-button ${
-              filters.type === 'loot' 
-                ? 'bg-neon-pink text-dark-bg' 
-                : 'border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-dark-bg'
-            }`}
+          </BitButton>
+          <BitButton
+            variant={filters.type === 'loot' ? 'neon' : 'ghost'}
+            size="sm"
             onClick={() => handleTypeFilter('loot')}
             data-testid="filter-loot"
           >
             LOOT
-          </Button>
-          <Button
-            className={`px-3 py-1 text-xs retro-button ${
-              filters.type === 'beta' 
-                ? 'bg-neon-purple text-white' 
-                : 'border border-neon-purple text-neon-purple hover:bg-neon-purple hover:text-white'
-            }`}
+          </BitButton>
+          <BitButton
+            variant={filters.type === 'beta' ? 'destructive' : 'ghost'}
+            size="sm"
             onClick={() => handleTypeFilter('beta')}
             data-testid="filter-beta"
           >
             BETA ACCESS
-          </Button>
-          <Button
-            className="px-3 py-1 border border-neon-yellow text-neon-yellow hover:bg-neon-yellow hover:text-dark-bg text-xs retro-button"
+          </BitButton>
+          <BitButton
+            variant="secondary"
+            size="sm"
             onClick={clearFilters}
             data-testid="button-clear-filters"
           >
             CLEAR ALL
-          </Button>
+          </BitButton>
         </div>
       </div>
     </section>
