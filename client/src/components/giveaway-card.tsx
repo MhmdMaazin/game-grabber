@@ -58,11 +58,11 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
         onClick={() => window.location.href = `/giveaway/${giveaway.id}`}
         className="block"
       >
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden aspect-video">
           <img 
             src={giveaway.image || giveaway.thumbnail} 
             alt={giveaway.title}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-contain bg-gray-900 group-hover:scale-105 transition-transform duration-300"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = 'https://via.placeholder.com/400x300/1a1a1a/ffffff?text=No+Image';
