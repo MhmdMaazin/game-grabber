@@ -68,8 +68,15 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
               target.src = 'https://via.placeholder.com/400x300/1a1a1a/00ff41?text=No+Image';
             }}
           />
-          <div className="absolute top-2 right-2 bg-neon-pink text-dark-bg px-2 py-1 text-xs">
-            {giveaway.worth}
+          <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
+            {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
+              <div className="bg-gray-600 text-white px-2 py-1 text-xs line-through">
+                {giveaway.worth}
+              </div>
+            )}
+            <div className="bg-neon-green text-dark-bg px-2 py-1 text-xs font-bold animate-pixel-pulse">
+              FREE
+            </div>
           </div>
           <div className={`absolute top-2 left-2 px-2 py-1 text-xs ${getPlatformColor(giveaway.platforms)}`}>
             {giveaway.platforms.split(',')[0].trim().toUpperCase()}

@@ -84,8 +84,15 @@ export default function GiveawayDetails() {
                   }}
                   data-testid="giveaway-image"
                 />
-                <div className="absolute top-4 right-4 bg-neon-pink text-dark-bg px-3 py-2 text-sm font-bold">
-                  {giveaway.worth}
+                <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
+                  {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
+                    <div className="bg-gray-600 text-white px-3 py-2 text-sm line-through">
+                      {giveaway.worth}
+                    </div>
+                  )}
+                  <div className="bg-neon-green text-dark-bg px-3 py-2 text-lg font-bold animate-pixel-pulse">
+                    FREE
+                  </div>
                 </div>
               </div>
 
@@ -119,6 +126,21 @@ export default function GiveawayDetails() {
                   {giveaway.title}
                 </h1>
                 
+                {/* Price Section */}
+                {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
+                  <div className="bg-dark-secondary border-2 border-neon-green p-4 mb-6 text-center">
+                    <div className="text-neon-green text-xs mb-2">ORIGINAL PRICE</div>
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="text-gray-400 text-xl line-through" data-testid="original-price">
+                        {giveaway.worth}
+                      </div>
+                      <div className="text-neon-green text-2xl font-bold animate-pixel-pulse" data-testid="free-price">
+                        FREE
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Meta Information */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="bg-dark-secondary border-2 border-neon-cyan p-3">
