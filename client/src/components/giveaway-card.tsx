@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import type { Giveaway } from "@shared/schema";
 
 interface GiveawayCardProps {
@@ -78,9 +79,9 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
               FREE
             </div>
           </div>
-          <div className={`absolute top-2 left-2 px-2 py-1 text-xs ${getPlatformColor(giveaway.platforms)}`}>
+          <Badge className={`absolute top-2 left-2 text-xs ${getPlatformColor(giveaway.platforms)} border-0`}>
             {giveaway.platforms.split(',')[0].trim().toUpperCase()}
-          </div>
+          </Badge>
         </div>
         
         <div className="p-4 pb-2">
@@ -94,13 +95,13 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
             {giveaway.description}
           </p>
           
-          <div className="flex justify-between items-center text-xs mb-3">
-            <span className="text-neon-cyan" data-testid={`type-${giveaway.id}`}>
+          <div className="flex justify-between items-center mb-3">
+            <Badge variant="secondary" className="text-neon-cyan bg-dark-bg border border-neon-cyan" data-testid={`type-${giveaway.id}`}>
               {giveaway.type}
-            </span>
-            <span className="text-neon-pink" data-testid={`end-date-${giveaway.id}`}>
+            </Badge>
+            <Badge variant="outline" className="text-neon-pink border-neon-pink" data-testid={`end-date-${giveaway.id}`}>
               {formatEndDate(giveaway.end_date)}
-            </span>
+            </Badge>
           </div>
         </div>
       </div>
