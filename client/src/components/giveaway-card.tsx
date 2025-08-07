@@ -53,8 +53,11 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
   };
 
   return (
-    <div className={`bg-dark-secondary border-2 ${getBorderColor(giveaway.type)} hover:border-neon-cyan transition-all duration-300 hover:neon-glow group relative`}>
-      <Link href={`/giveaway/${giveaway.id}`} className="no-underline block">
+    <div className={`bg-dark-secondary border-2 ${getBorderColor(giveaway.type)} hover:border-neon-cyan transition-all duration-300 hover:neon-glow group cursor-pointer`}>
+      <div 
+        onClick={() => window.location.href = `/giveaway/${giveaway.id}`}
+        className="block"
+      >
         <div className="relative overflow-hidden">
           <img 
             src={giveaway.image || giveaway.thumbnail} 
@@ -73,9 +76,9 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
           </div>
         </div>
         
-        <div className="p-4">
+        <div className="p-4 pb-2">
           <h3 
-            className="text-neon-yellow text-sm mb-2 truncate hover:text-neon-green transition-colors cursor-pointer" 
+            className="text-neon-yellow text-sm mb-2 truncate hover:text-neon-green transition-colors" 
             data-testid={`title-${giveaway.id}`}
           >
             {giveaway.title}
@@ -93,12 +96,12 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
             </span>
           </div>
         </div>
-      </Link>
+      </div>
       
-      {/* Claim button positioned absolutely to be clickable separately */}
-      <div className="absolute bottom-4 left-4 right-4">
+      {/* Claim button positioned normally but with event handling to prevent card navigation */}
+      <div className="px-4 pb-4">
         <Button
-          className={`w-full py-2 px-4 transition-colors retro-button text-xs ${getButtonColor(giveaway.type)} z-10 relative`}
+          className={`w-full py-2 px-4 transition-colors retro-button text-xs ${getButtonColor(giveaway.type)}`}
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
