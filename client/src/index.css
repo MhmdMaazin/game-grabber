@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(210, 25%, 7.8431%);
+  --card: hsl(180, 6.6667%, 97.0588%);
+  --card-foreground: hsl(210, 25%, 7.8431%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 25%, 7.8431%);
+  --primary: hsl(203.8863, 88.2845%, 53.1373%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(210, 25%, 7.8431%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(240, 1.9608%, 90%);
+  --muted-foreground: hsl(210, 25%, 7.8431%);
+  --accent: hsl(211.5789, 51.3514%, 92.7451%);
+  --accent-foreground: hsl(203.8863, 88.2845%, 53.1373%);
+  --destructive: hsl(356.3033, 90.5579%, 54.3137%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(201.4286, 30.4348%, 90.9804%);
+  --input: hsl(200, 23.0769%, 97.4510%);
+  --ring: hsl(202.8169, 89.1213%, 53.1373%);
+  --chart-1: hsl(203.8863, 88.2845%, 53.1373%);
+  --chart-2: hsl(159.7826, 100%, 36.0784%);
+  --chart-3: hsl(42.0290, 92.8251%, 56.2745%);
+  --chart-4: hsl(147.1429, 78.5047%, 41.9608%);
+  --chart-5: hsl(341.4894, 75.2000%, 50.9804%);
+  --sidebar: hsl(180, 6.6667%, 97.0588%);
+  --sidebar-foreground: hsl(210, 25%, 7.8431%);
+  --sidebar-primary: hsl(203.8863, 88.2845%, 53.1373%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(211.5789, 51.3514%, 92.7451%);
+  --sidebar-accent-foreground: hsl(203.8863, 88.2845%, 53.1373%);
+  --sidebar-border: hsl(205.0000, 25.0000%, 90.5882%);
+  --sidebar-ring: hsl(202.8169, 89.1213%, 53.1373%);
+  --font-sans: 'Press Start 2P', monospace;
+  --font-serif: Georgia, serif;
+  --font-mono: 'Press Start 2P', monospace;
+  --radius: 0px;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 2px 4px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 4px 6px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 8px 10px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+  
+  /* 8-bit custom colors */
+  --neon-green: hsl(129, 100%, 50%);
+  --neon-cyan: hsl(180, 100%, 60%);
+  --neon-pink: hsl(330, 100%, 70%);
+  --neon-yellow: hsl(60, 100%, 60%);
+  --neon-purple: hsl(270, 60%, 60%);
+  --game-red: hsl(0, 65%, 70%);
+  --dark-bg: hsl(220, 30%, 7%);
+  --dark-secondary: hsl(220, 25%, 11%);
+  --dark-tertiary: hsl(220, 20%, 16%);
+}
+
+.dark {
+  --background: hsl(0, 0%, 0%);
+  --foreground: hsl(200, 6.6667%, 91.1765%);
+  --card: hsl(228, 9.8039%, 10%);
+  --card-foreground: hsl(0, 0%, 85.0980%);
+  --popover: hsl(0, 0%, 0%);
+  --popover-foreground: hsl(200, 6.6667%, 91.1765%);
+  --primary: hsl(203.7736, 87.6033%, 52.5490%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(195.0000, 15.3846%, 94.9020%);
+  --secondary-foreground: hsl(210, 25%, 7.8431%);
+  --muted: hsl(0, 0%, 9.4118%);
+  --muted-foreground: hsl(210, 3.3898%, 46.2745%);
+  --accent: hsl(205.7143, 70%, 7.8431%);
+  --accent-foreground: hsl(203.7736, 87.6033%, 52.5490%);
+  --destructive: hsl(356.3033, 90.5579%, 54.3137%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(210, 5.2632%, 14.9020%);
+  --input: hsl(207.6923, 27.6596%, 18.4314%);
+  --ring: hsl(202.8169, 89.1213%, 53.1373%);
+  --chart-1: hsl(203.8863, 88.2845%, 53.1373%);
+  --chart-2: hsl(159.7826, 100%, 36.0784%);
+  --chart-3: hsl(42.0290, 92.8251%, 56.2745%);
+  --chart-4: hsl(147.1429, 78.5047%, 41.9608%);
+  --chart-5: hsl(341.4894, 75.2000%, 50.9804%);
+  --sidebar: hsl(228, 9.8039%, 10%);
+  --sidebar-foreground: hsl(0, 0%, 85.0980%);
+  --sidebar-primary: hsl(202.8169, 89.1213%, 53.1373%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(205.7143, 70%, 7.8431%);
+  --sidebar-accent-foreground: hsl(203.7736, 87.6033%, 52.5490%);
+  --sidebar-border: hsl(205.7143, 15.7895%, 26.0784%);
+  --sidebar-ring: hsl(202.8169, 89.1213%, 53.1373%);
+  --font-sans: 'Press Start 2P', monospace;
+  --font-serif: Georgia, serif;
+  --font-mono: 'Press Start 2P', monospace;
+  --radius: 0px;
+  --shadow-2xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xs: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-sm: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 1px 2px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-md: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 2px 4px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-lg: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 4px 6px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00), 0px 8px 10px -1px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+  --shadow-2xl: 0px 2px 0px 0px hsl(202.8169, 89.1213%, 53.1373%, 0.00);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-mono antialiased text-white overflow-x-hidden;
+    background: var(--dark-bg);
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+
+  /* 8-bit styling */
+  .font-pixel {
+    font-family: 'Press Start 2P', monospace;
+  }
+
+  .pixel-border {
+    image-rendering: pixelated;
+  }
+
+  .retro-button {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    transition: all 0.1s ease;
+  }
+
+  .retro-button:hover {
+    transform: scale(0.95);
+  }
+
+  .retro-button:active {
+    transform: scale(0.9);
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+
+  .pixel-shadow {
+    box-shadow: 4px 4px 0px #000000;
+  }
+
+  /* Scanline effect */
+  .scanlines::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    animation: scanline 2s linear infinite;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+  }
+
+  @keyframes pixel-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .animate-glitch {
+    animation: glitch 2s infinite;
+  }
+
+  .animate-pixel-pulse {
+    animation: pixel-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-neon-green { color: var(--neon-green); }
+  .text-neon-cyan { color: var(--neon-cyan); }
+  .text-neon-pink { color: var(--neon-pink); }
+  .text-neon-yellow { color: var(--neon-yellow); }
+  .text-neon-purple { color: var(--neon-purple); }
+  .text-game-red { color: var(--game-red); }
+  
+  .bg-neon-green { background-color: var(--neon-green); }
+  .bg-neon-cyan { background-color: var(--neon-cyan); }
+  .bg-neon-pink { background-color: var(--neon-pink); }
+  .bg-neon-yellow { background-color: var(--neon-yellow); }
+  .bg-neon-purple { background-color: var(--neon-purple); }
+  .bg-game-red { background-color: var(--game-red); }
+  .bg-dark-bg { background-color: var(--dark-bg); }
+  .bg-dark-secondary { background-color: var(--dark-secondary); }
+  .bg-dark-tertiary { background-color: var(--dark-tertiary); }
+  
+  .border-neon-green { border-color: var(--neon-green); }
+  .border-neon-cyan { border-color: var(--neon-cyan); }
+  .border-neon-pink { border-color: var(--neon-pink); }
+  .border-neon-yellow { border-color: var(--neon-yellow); }
+  .border-neon-purple { border-color: var(--neon-purple); }
+  .border-game-red { border-color: var(--game-red); }
+
+  .hover\:bg-neon-green:hover { background-color: var(--neon-green); }
+  .hover\:bg-neon-cyan:hover { background-color: var(--neon-cyan); }
+  .hover\:bg-neon-pink:hover { background-color: var(--neon-pink); }
+  .hover\:bg-neon-yellow:hover { background-color: var(--neon-yellow); }
+  .hover\:bg-neon-purple:hover { background-color: var(--neon-purple); }
+  .hover\:bg-game-red:hover { background-color: var(--game-red); }
+  
+  .hover\:text-neon-green:hover { color: var(--neon-green); }
+  .hover\:text-neon-cyan:hover { color: var(--neon-cyan); }
+  .hover\:text-neon-pink:hover { color: var(--neon-pink); }
+  .hover\:text-neon-yellow:hover { color: var(--neon-yellow); }
+  .hover\:text-neon-purple:hover { color: var(--neon-purple); }
+  .hover\:text-game-red:hover { color: var(--game-red); }
+  
+  .hover\:border-neon-green:hover { border-color: var(--neon-green); }
+  .hover\:border-neon-cyan:hover { border-color: var(--neon-cyan); }
+  .hover\:border-neon-pink:hover { border-color: var(--neon-pink); }
+  .hover\:border-neon-yellow:hover { border-color: var(--neon-yellow); }
+  .hover\:border-neon-purple:hover { border-color: var(--neon-purple); }
+  .hover\:border-game-red:hover { border-color: var(--game-red); }
+}
