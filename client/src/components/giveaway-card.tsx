@@ -53,57 +53,50 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
   };
 
   return (
-    <div className={`bg-dark-secondary border-2 ${getBorderColor(giveaway.type)} hover:border-neon-cyan transition-all duration-300 hover:neon-glow group relative`}>
-      <Link href={`/giveaway/${giveaway.id}`} className="no-underline block">
-        <div className="relative overflow-hidden">
-          <img 
-            src={giveaway.image || giveaway.thumbnail} 
-            alt={giveaway.title}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = 'https://via.placeholder.com/400x300/1a1a1a/00ff41?text=No+Image';
-            }}
-          />
-          <div className="absolute top-2 right-2 bg-neon-pink text-dark-bg px-2 py-1 text-xs">
-            {giveaway.worth}
-          </div>
-          <div className={`absolute top-2 left-2 px-2 py-1 text-xs ${getPlatformColor(giveaway.platforms)}`}>
-            {giveaway.platforms.split(',')[0].trim().toUpperCase()}
-          </div>
+    <div className={`bg-dark-secondary border-2 ${getBorderColor(giveaway.type)} hover:border-neon-cyan transition-all duration-300 hover:neon-glow group`}>
+      <div className="relative overflow-hidden">
+        <img 
+          src={giveaway.image || giveaway.thumbnail} 
+          alt={giveaway.title}
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = 'https://via.placeholder.com/400x300/1a1a1a/00ff41?text=No+Image';
+          }}
+        />
+        <div className="absolute top-2 right-2 bg-neon-pink text-dark-bg px-2 py-1 text-xs">
+          {giveaway.worth}
         </div>
-        
-        <div className="p-4">
+        <div className={`absolute top-2 left-2 px-2 py-1 text-xs ${getPlatformColor(giveaway.platforms)}`}>
+          {giveaway.platforms.split(',')[0].trim().toUpperCase()}
+        </div>
+      </div>
+      
+      <div className="p-4">
+        <Link href={`/giveaway/${giveaway.id}`} className="no-underline">
           <h3 
             className="text-neon-yellow text-sm mb-2 truncate hover:text-neon-green transition-colors cursor-pointer" 
             data-testid={`title-${giveaway.id}`}
           >
             {giveaway.title}
           </h3>
-          <p className="text-gray-400 text-xs mb-3 line-clamp-2" data-testid={`description-${giveaway.id}`}>
-            {giveaway.description}
-          </p>
-          
-          <div className="flex justify-between items-center text-xs mb-3">
-            <span className="text-neon-cyan" data-testid={`type-${giveaway.id}`}>
-              {giveaway.type}
-            </span>
-            <span className="text-neon-pink" data-testid={`end-date-${giveaway.id}`}>
-              {formatEndDate(giveaway.end_date)}
-            </span>
-          </div>
+        </Link>
+        <p className="text-gray-400 text-xs mb-3 line-clamp-2" data-testid={`description-${giveaway.id}`}>
+          {giveaway.description}
+        </p>
+        
+        <div className="flex justify-between items-center text-xs mb-3">
+          <span className="text-neon-cyan" data-testid={`type-${giveaway.id}`}>
+            {giveaway.type}
+          </span>
+          <span className="text-neon-pink" data-testid={`end-date-${giveaway.id}`}>
+            {formatEndDate(giveaway.end_date)}
+          </span>
         </div>
-      </Link>
-      
-      {/* Claim button positioned absolutely to be clickable separately */}
-      <div className="absolute bottom-4 left-4 right-4">
+        
         <Button
-          className={`w-full py-2 px-4 transition-colors retro-button text-xs ${getButtonColor(giveaway.type)} z-10 relative`}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleClaimClick();
-          }}
+          className={`w-full py-2 px-4 transition-colors retro-button text-xs ${getButtonColor(giveaway.type)}`}
+          onClick={handleClaimClick}
           data-testid={`button-claim-${giveaway.id}`}
         >
           {giveaway.type.toLowerCase() === 'beta' ? 'JOIN BETA' : 'CLAIM NOW'}
