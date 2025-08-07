@@ -40,7 +40,7 @@ export default function GiveawayDetails() {
         <div className="mb-8">
           <Link href="/">
             <Button 
-              className="flex items-center gap-2 bg-dark-secondary border-2 border-neon-cyan text-neon-cyan hover:bg-neon-cyan hover:text-dark-bg retro-button"
+              className="flex items-center gap-2 bg-dark-secondary border border-gray-600 text-white hover:bg-gray-700 retro-button"
               data-testid="button-back"
             >
               <ArrowLeft size={16} />
@@ -52,16 +52,16 @@ export default function GiveawayDetails() {
         {/* Loading State */}
         {isLoading && (
           <div className="text-center py-12" data-testid="loading-state">
-            <div className="inline-block w-16 h-16 border-4 border-neon-green border-t-transparent animate-spin"></div>
-            <p className="text-neon-cyan mt-4">LOADING GIVEAWAY...</p>
+            <div className="inline-block w-16 h-16 border-4 border-gray-600 border-t-transparent animate-spin"></div>
+            <p className="text-white mt-4">LOADING GIVEAWAY...</p>
           </div>
         )}
 
         {/* Error State */}
         {error && (
           <div className="text-center py-12" data-testid="error-state">
-            <div className="text-game-red text-lg mb-4">⚠️ ERROR</div>
-            <p className="text-neon-cyan">Failed to load giveaway details.</p>
+            <div className="text-red-500 text-lg mb-4">⚠️ ERROR</div>
+            <p className="text-white">Failed to load giveaway details.</p>
             <p className="text-gray-400 text-xs mt-2">
               {error instanceof Error ? error.message : 'Unknown error occurred'}
             </p>
@@ -77,10 +77,10 @@ export default function GiveawayDetails() {
                 <img 
                   src={giveaway.image || giveaway.thumbnail}
                   alt={giveaway.title}
-                  className="w-full rounded-none border-2 border-neon-green"
+                  className="w-full rounded-none border border-gray-600"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = 'https://via.placeholder.com/600x400/1a1a1a/00ff41?text=No+Image';
+                    target.src = 'https://via.placeholder.com/600x400/1a1a1a/ffffff?text=No+Image';
                   }}
                   data-testid="giveaway-image"
                 />
@@ -90,7 +90,7 @@ export default function GiveawayDetails() {
                       {giveaway.worth}
                     </div>
                   )}
-                  <div className="bg-neon-green text-dark-bg px-3 py-2 text-lg font-bold animate-pixel-pulse">
+                  <div className="bg-green-500 text-white px-3 py-2 text-lg font-bold">
                     FREE
                   </div>
                 </div>
@@ -100,7 +100,7 @@ export default function GiveawayDetails() {
               <div className="flex gap-4">
                 <Button
                   onClick={handleClaimClick}
-                  className="flex-1 bg-neon-green text-dark-bg hover:bg-neon-cyan text-sm py-3 retro-button"
+                  className="flex-1 bg-gray-700 text-white hover:bg-gray-600 text-sm py-3 retro-button"
                   data-testid="button-claim-main"
                 >
                   <ExternalLink size={16} className="mr-2" />
@@ -110,7 +110,7 @@ export default function GiveawayDetails() {
                 {giveaway.gamerpower_url && (
                   <Button
                     onClick={() => window.open(giveaway.gamerpower_url, '_blank', 'noopener,noreferrer')}
-                    className="border-2 border-neon-yellow text-neon-yellow hover:bg-neon-yellow hover:text-dark-bg retro-button text-sm py-3"
+                    className="border border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white retro-button text-sm py-3"
                     data-testid="button-view-more"
                   >
                     VIEW MORE
@@ -122,19 +122,19 @@ export default function GiveawayDetails() {
             {/* Details Section */}
             <div className="space-y-6">
               <div>
-                <h1 className="text-2xl md:text-3xl text-neon-yellow mb-4" data-testid="giveaway-title">
+                <h1 className="text-2xl md:text-3xl text-white mb-4" data-testid="giveaway-title">
                   {giveaway.title}
                 </h1>
                 
                 {/* Price Section */}
                 {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
-                  <div className="bg-dark-secondary border-2 border-neon-green p-4 mb-6 text-center">
-                    <div className="text-neon-green text-xs mb-2">ORIGINAL PRICE</div>
+                  <div className="bg-dark-secondary border border-gray-600 p-4 mb-6 text-center">
+                    <div className="text-gray-300 text-xs mb-2">ORIGINAL PRICE</div>
                     <div className="flex items-center justify-center gap-4">
                       <div className="text-gray-400 text-xl line-through" data-testid="original-price">
                         {giveaway.worth}
                       </div>
-                      <div className="text-neon-green text-2xl font-bold animate-pixel-pulse" data-testid="free-price">
+                      <div className="text-green-500 text-2xl font-bold" data-testid="free-price">
                         FREE
                       </div>
                     </div>
@@ -143,24 +143,24 @@ export default function GiveawayDetails() {
 
                 {/* Meta Information */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-dark-secondary border-2 border-neon-cyan p-3">
-                    <div className="flex items-center gap-2 text-neon-cyan mb-1">
+                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                    <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <Tag size={14} />
                       <span className="text-xs">TYPE</span>
                     </div>
                     <div className="text-white text-sm" data-testid="giveaway-type">{giveaway.type}</div>
                   </div>
                   
-                  <div className="bg-dark-secondary border-2 border-neon-pink p-3">
-                    <div className="flex items-center gap-2 text-neon-pink mb-1">
+                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                    <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <Users size={14} />
                       <span className="text-xs">USERS</span>
                     </div>
                     <div className="text-white text-sm" data-testid="giveaway-users">{giveaway.users.toLocaleString()}</div>
                   </div>
                   
-                  <div className="bg-dark-secondary border-2 border-neon-green p-3">
-                    <div className="flex items-center gap-2 text-neon-green mb-1">
+                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                    <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <Calendar size={14} />
                       <span className="text-xs">PUBLISHED</span>
                     </div>
@@ -169,8 +169,8 @@ export default function GiveawayDetails() {
                     </div>
                   </div>
                   
-                  <div className="bg-dark-secondary border-2 border-neon-yellow p-3">
-                    <div className="flex items-center gap-2 text-neon-yellow mb-1">
+                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                    <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <span className="text-xs">PLATFORMS</span>
                     </div>
                     <div className="text-white text-xs" data-testid="giveaway-platforms">{giveaway.platforms}</div>
@@ -178,7 +178,7 @@ export default function GiveawayDetails() {
                 </div>
                 
                 {giveaway.end_date && giveaway.end_date !== "N/A" && (
-                  <div className="bg-game-red border-2 border-game-red p-3 mb-6">
+                  <div className="bg-red-900 border border-red-700 p-3 mb-6">
                     <div className="flex items-center gap-2 text-white mb-1">
                       <Calendar size={14} />
                       <span className="text-xs">EXPIRES</span>
@@ -192,7 +192,7 @@ export default function GiveawayDetails() {
 
               {/* Description */}
               <div>
-                <h2 className="text-neon-green text-lg mb-3">DESCRIPTION</h2>
+                <h2 className="text-white text-lg mb-3">DESCRIPTION</h2>
                 <p className="text-gray-300 text-sm leading-relaxed" data-testid="giveaway-description">
                   {giveaway.description}
                 </p>
@@ -201,8 +201,8 @@ export default function GiveawayDetails() {
               {/* Instructions */}
               {giveaway.instructions && (
                 <div>
-                  <h2 className="text-neon-purple text-lg mb-3">HOW TO CLAIM</h2>
-                  <div className="bg-dark-secondary border-2 border-neon-purple p-4">
+                  <h2 className="text-white text-lg mb-3">HOW TO CLAIM</h2>
+                  <div className="bg-dark-secondary border border-gray-600 p-4">
                     <p className="text-gray-300 text-sm leading-relaxed" data-testid="giveaway-instructions">
                       {giveaway.instructions}
                     </p>
@@ -211,12 +211,12 @@ export default function GiveawayDetails() {
               )}
 
               {/* Status */}
-              <div className="bg-dark-tertiary border-2 border-neon-cyan p-4">
+              <div className="bg-dark-secondary border border-gray-600 p-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-neon-cyan text-sm">STATUS</span>
+                  <span className="text-gray-300 text-sm">STATUS</span>
                   <span 
                     className={`text-sm font-bold ${
-                      giveaway.status === 'Active' ? 'text-neon-green' : 'text-game-red'
+                      giveaway.status === 'Active' ? 'text-green-500' : 'text-red-500'
                     }`}
                     data-testid="giveaway-status"
                   >

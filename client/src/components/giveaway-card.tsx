@@ -24,26 +24,26 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
 
   const getBorderColor = (type: string) => {
     switch (type.toLowerCase()) {
-      case 'loot': return 'border-neon-yellow';
-      case 'beta': return 'border-game-red';
-      default: return 'border-neon-green';
+      case 'loot': return 'border-gray-600';
+      case 'beta': return 'border-gray-600';
+      default: return 'border-gray-600';
     }
   };
 
   const getButtonColor = (type: string) => {
     switch (type.toLowerCase()) {
-      case 'loot': return 'bg-neon-yellow text-dark-bg hover:bg-neon-green';
-      case 'beta': return 'bg-game-red text-white hover:bg-neon-yellow hover:text-dark-bg';
-      default: return 'bg-neon-green text-dark-bg hover:bg-neon-cyan';
+      case 'loot': return 'bg-gray-700 text-white hover:bg-gray-600';
+      case 'beta': return 'bg-gray-700 text-white hover:bg-gray-600';
+      default: return 'bg-gray-700 text-white hover:bg-gray-600';
     }
   };
 
   const getPlatformColor = (platform: string) => {
     const platformLower = platform.toLowerCase();
-    if (platformLower.includes('steam')) return 'bg-neon-green text-dark-bg';
-    if (platformLower.includes('epic')) return 'bg-neon-purple text-white';
-    if (platformLower.includes('gog')) return 'bg-game-red text-white';
-    return 'bg-neon-cyan text-dark-bg';
+    if (platformLower.includes('steam')) return 'bg-gray-600 text-white';
+    if (platformLower.includes('epic')) return 'bg-gray-600 text-white';
+    if (platformLower.includes('gog')) return 'bg-gray-600 text-white';
+    return 'bg-gray-600 text-white';
   };
 
   const handleClaimClick = () => {
@@ -53,7 +53,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
   };
 
   return (
-    <div className={`bg-dark-secondary border-2 ${getBorderColor(giveaway.type)} hover:border-neon-cyan transition-all duration-300 hover:neon-glow group cursor-pointer`}>
+    <div className={`bg-dark-secondary border ${getBorderColor(giveaway.type)} hover:border-gray-500 transition-all duration-300 group cursor-pointer`}>
       <div 
         onClick={() => window.location.href = `/giveaway/${giveaway.id}`}
         className="block"
@@ -65,7 +65,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = 'https://via.placeholder.com/400x300/1a1a1a/00ff41?text=No+Image';
+              target.src = 'https://via.placeholder.com/400x300/1a1a1a/ffffff?text=No+Image';
             }}
           />
           <div className="absolute top-2 right-2 flex flex-col items-end gap-1">
@@ -74,7 +74,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
                 {giveaway.worth}
               </div>
             )}
-            <div className="bg-neon-green text-dark-bg px-2 py-1 text-xs font-bold animate-pixel-pulse">
+            <div className="bg-green-500 text-white px-2 py-1 text-xs font-bold">
               FREE
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
         
         <div className="p-4 pb-2">
           <h3 
-            className="text-neon-yellow text-sm mb-2 truncate hover:text-neon-green transition-colors" 
+            className="text-white text-sm mb-2 truncate hover:text-gray-300 transition-colors" 
             data-testid={`title-${giveaway.id}`}
           >
             {giveaway.title}
@@ -95,10 +95,10 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
           </p>
           
           <div className="flex justify-between items-center text-xs mb-3">
-            <span className="text-neon-cyan" data-testid={`type-${giveaway.id}`}>
+            <span className="text-gray-300" data-testid={`type-${giveaway.id}`}>
               {giveaway.type}
             </span>
-            <span className="text-neon-pink" data-testid={`end-date-${giveaway.id}`}>
+            <span className="text-gray-400" data-testid={`end-date-${giveaway.id}`}>
               {formatEndDate(giveaway.end_date)}
             </span>
           </div>
