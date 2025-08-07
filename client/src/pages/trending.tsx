@@ -110,7 +110,7 @@ export default function Trending() {
                 <Gift className="w-3 h-3" />
                 ACTIVE
               </CardTitle>
-            </Header>
+            </CardHeader>
             <CardContent className="pt-0">
               <div className="text-white text-lg font-bold">{stats?.totalGiveaways || 0}</div>
             </CardContent>
@@ -122,7 +122,7 @@ export default function Trending() {
                 <DollarSign className="w-3 h-3" />
                 TOTAL VALUE
               </CardTitle>
-            </Header>
+            </CardHeader>
             <CardContent className="pt-0">
               <div className="text-green-500 text-lg font-bold">${stats?.totalValue || '0'}</div>
             </CardContent>
@@ -134,7 +134,7 @@ export default function Trending() {
                 <Users className="w-3 h-3" />
                 TOP PLATFORM
               </CardTitle>
-            </Header>
+            </CardHeader>
             <CardContent className="pt-0">
               <div className="text-white text-sm font-bold">
                 {stats?.platforms ? Object.entries(stats.platforms).reduce((a, b) => a[1] > b[1] ? a : b)[0].toUpperCase() : 'STEAM'}
@@ -145,7 +145,7 @@ export default function Trending() {
           <Card className="bg-dark-secondary border-gray-600">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs">HOT TYPE</CardTitle>
-            </Header>
+            </CardHeader>
             <CardContent className="pt-0">
               <div className="text-white text-sm font-bold">
                 {stats?.types ? Object.entries(stats.types).reduce((a, b) => a[1] > b[1] ? a : b)[0].toUpperCase() : 'GAME'}
