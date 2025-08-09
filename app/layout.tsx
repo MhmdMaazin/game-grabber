@@ -5,6 +5,10 @@ import { Providers } from './providers';
 export const metadata: Metadata = {
   title: 'Game Grabber - Free Game Giveaway Tracker',
   description: 'Discover and claim free game giveaways from Steam, Epic Games, GOG and more with Game Grabber.',
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
   openGraph: {
     title: 'Game Grabber - Free Game Giveaway Tracker',
     description: 'Discover and claim free game giveaways from Steam, Epic Games, GOG and more with Game Grabber.',
