@@ -27,7 +27,7 @@ type Giveaway = {
 
 type Stats = {
   totalGiveaways: number;
-  totalValue: string;
+  totalValue: number;
   platforms: Record<string, number>;
   types: Record<string, number>;
 };
@@ -117,7 +117,7 @@ export default function Trending() {
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-0">
-              <div className="text-green-500 text-lg font-bold">${stats?.totalValue || '0'}</div>
+              <div className="text-green-500 text-lg font-bold">${Math.round(stats?.totalValue || 0)}</div>
             </CardContent>
           </Card>
 

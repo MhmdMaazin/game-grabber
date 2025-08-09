@@ -1,4 +1,6 @@
-import { useRoute, Link } from "wouter";
+"use client";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ExternalLink, Calendar, Users, Tag } from "lucide-react";
@@ -7,7 +9,7 @@ import Footer from "@/components/footer";
 import type { Giveaway } from "@shared/schema";
 
 export default function GiveawayDetails() {
-  const [match, params] = useRoute("/giveaway/:id");
+  const params = useParams<{ id: string }>();
   const giveawayId = params?.id;
 
   const { data: giveaway, isLoading, error } = useQuery<Giveaway>({

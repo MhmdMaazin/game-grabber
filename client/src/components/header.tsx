@@ -1,14 +1,17 @@
-import { Link, useLocation } from "wouter";
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import pixelPassLogo from "@assets/pixel_pass_logo_1754551439357.png";
+import Image from "next/image";
 
 export default function Header() {
-  const [location] = useLocation();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isActive = (path: string) => {
-    return location === path;
+    return pathname === path;
   };
 
   const toggleMobileMenu = () => {
@@ -26,10 +29,13 @@ export default function Header() {
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3 no-underline" onClick={closeMobileMenu}>
             <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
-              <img 
-                src={pixelPassLogo} 
-                alt="Pixel Pass Logo" 
+              <Image
+                src={pixelPassLogo}
+                alt="Game Grabber Logo"
+                width={48}
+                height={48}
                 className="w-full h-full object-contain pixel-border"
+                priority
               />
             </div>
             <div>
@@ -42,7 +48,7 @@ export default function Header() {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-2 text-xs">
-            <Link href="/">
+            <Link href="/" className="no-underline">
               <button 
                 className={`px-4 py-2 transition-all retro-button border border-gray-600 ${
                   isActive('/') 
@@ -54,7 +60,7 @@ export default function Header() {
                 HOME
               </button>
             </Link>
-            <Link href="/trending">
+            <Link href="/trending" className="no-underline">
               <button 
                 className={`px-4 py-2 transition-all retro-button border border-gray-600 ${
                   isActive('/trending') 
@@ -66,7 +72,7 @@ export default function Header() {
                 TRENDING
               </button>
             </Link>
-            <Link href="/about">
+            <Link href="/about" className="no-underline">
               <button 
                 className={`px-4 py-2 transition-all retro-button border border-gray-600 ${
                   isActive('/about') 
@@ -95,7 +101,7 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pt-4 border-t border-gray-600">
             <nav className="flex flex-col gap-2 text-xs">
-              <Link href="/">
+              <Link href="/" className="no-underline">
                 <button 
                   className={`w-full px-4 py-3 text-left transition-all retro-button border border-gray-600 ${
                     isActive('/') 
@@ -108,7 +114,7 @@ export default function Header() {
                   HOME
                 </button>
               </Link>
-              <Link href="/trending">
+              <Link href="/trending" className="no-underline">
                 <button 
                   className={`w-full px-4 py-3 text-left transition-all retro-button border border-gray-600 ${
                     isActive('/trending') 
@@ -121,7 +127,7 @@ export default function Header() {
                   TRENDING
                 </button>
               </Link>
-              <Link href="/about">
+              <Link href="/about" className="no-underline">
                 <button 
                   className={`w-full px-4 py-3 text-left transition-all retro-button border border-gray-600 ${
                     isActive('/about') 

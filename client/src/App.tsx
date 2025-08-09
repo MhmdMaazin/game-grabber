@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+"use client";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -9,25 +9,14 @@ import GiveawayDetails from "./pages/giveaway-details";
 import Trending from "./pages/trending";
 import About from "./pages/about";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/trending" component={Trending} />
-      <Route path="/about" component={About} />
-      <Route path="/giveaway/:id" component={GiveawayDetails} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="scanlines min-h-screen bg-dark-bg text-white font-pixel">
           <Toaster />
-          <Router />
+          {/* Routes are managed by Next.js App Router */}
+          <Home />
         </div>
       </TooltipProvider>
     </QueryClientProvider>

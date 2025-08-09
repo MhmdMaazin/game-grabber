@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Mirror client/src/index.css to keep design */
+}
+
+/* Reuse the existing CSS by importing from client */
+@import '../client/src/index.css';
+@import '../components/ui/8bit/styles/retro.css';
+
+

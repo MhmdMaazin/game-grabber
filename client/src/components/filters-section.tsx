@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+// Use the installed 8bitcn Button
+import { Button } from "@/components/ui/8bit/button";
 import type { FilterState } from "@/lib/types";
 
 interface FiltersSectionProps {
@@ -92,43 +93,43 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
         </div>
 
         {/* Filter Tags */}
-        <div className="flex flex-wrap gap-2 mt-6">
-          <span className="text-gray-300 text-xs">FILTER BY TYPE:</span>
+        <div className="flex flex-wrap items-center gap-2 mt-6">
+          <span className="text-gray-300 text-xs whitespace-nowrap">FILTER BY TYPE:</span>
           <Button
-            className={`px-3 py-1 text-xs retro-button ${
-              filters.type === 'game' 
-                ? 'bg-gray-600 text-white' 
-                : 'border border-gray-600 text-gray-300 hover:bg-gray-600 hover:text-white'
-            }`}
+            variant="outline"
+            size="sm"
+            font="retro"
+            className="px-3 py-1 text-[10px] md:text-xs retro-button-white"
             onClick={() => handleTypeFilter('game')}
             data-testid="filter-game"
           >
             GAMES
           </Button>
           <Button
-            className={`px-3 py-1 text-xs retro-button ${
-              filters.type === 'loot' 
-                ? 'bg-gray-600 text-white' 
-                : 'border border-gray-600 text-gray-300 hover:bg-gray-600 hover:text-white'
-            }`}
+            variant="outline"
+            size="sm"
+            font="retro"
+            className="px-3 py-1 text-[10px] md:text-xs retro-button-white"
             onClick={() => handleTypeFilter('loot')}
-            data-testid="filter-loot"
+            // data-testid="filter-loot"
           >
             LOOT
           </Button>
           <Button
-            className={`px-3 py-1 text-xs retro-button ${
-              filters.type === 'beta' 
-                ? 'bg-gray-600 text-white' 
-                : 'border border-gray-600 text-gray-300 hover:bg-gray-600 hover:text-white'
-            }`}
+            variant="outline"
+            size="sm"
+            font="retro"
+            className="px-3 py-1 text-[10px] md:text-xs retro-button-white"
             onClick={() => handleTypeFilter('beta')}
             data-testid="filter-beta"
           >
             BETA ACCESS
           </Button>
           <Button
-            className="px-3 py-1 border border-gray-600 text-gray-300 hover:bg-gray-600 hover:text-white text-xs retro-button"
+            variant="outline"
+            size="sm"
+            font="retro"
+            className="px-3 py-1 text-[10px] md:text-xs retro-button-white"
             onClick={clearFilters}
             data-testid="button-clear-filters"
           >

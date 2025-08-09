@@ -3,6 +3,7 @@ import Footer from "../components/footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Info, Gamepad2, Shield, Zap, Globe, Heart } from "lucide-react";
 import pixelPassLogo from "@assets/pixel_pass_logo_1754551439357.png";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -14,16 +15,19 @@ export default function About() {
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
             <div className="w-20 h-20 flex items-center justify-center">
-              <img 
-                src={pixelPassLogo} 
-                alt="Pixel Pass Logo" 
+              <Image
+                src={pixelPassLogo}
+                alt="Game Grabber Logo" 
+                width={80}
+                height={80}
                 className="w-full h-full object-contain pixel-border"
+                priority
               />
             </div>
           </div>
           <h1 className="text-3xl md:text-4xl text-white mb-4 flex items-center justify-center gap-3">
             <Info className="w-8 h-8" />
-            ABOUT PIXEL PASS
+            ABOUT GAME GRABBER
           </h1>
           <p className="text-gray-400 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
             Your ultimate destination for discovering free games, DLC, and exclusive content from across the gaming universe
@@ -40,7 +44,7 @@ export default function About() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-300 leading-relaxed">
-              At Pixel Pass, we believe gaming should be accessible to everyone. Our mission is to help gamers discover 
+              At Game Grabber, we believe gaming should be accessible to everyone. Our mission is to help gamers discover 
               amazing free content, from full games to exclusive DLC and beta access. We aggregate giveaways from 
               trusted platforms like Steam, Epic Games Store, GOG, and more, bringing you the best deals in one place.
             </p>

@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-white text-sm mb-4">PIXEL PASS</h3>
+            <h3 className="text-white text-sm mb-4">GAME GRABBER</h3>
             <p className="text-gray-400 text-xs">
               Your ultimate destination for free game giveaways and digital treasures.
             </p>
@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-6 text-center">
-          <p className="text-gray-500 text-xs">© 2024 Pixel Pass - Made for gamers</p>
+          <p className="text-gray-500 text-xs">© 2024 Game Grabber - Made for gamers</p>
         </div>
       </div>
     </footer>

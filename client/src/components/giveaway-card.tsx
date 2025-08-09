@@ -1,4 +1,5 @@
-import { Link } from "wouter";
+"use client";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import type { Giveaway } from "@shared/schema";
 
@@ -62,10 +63,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
     <div
       className={`bg-dark-secondary border ${getBorderColor(giveaway.type)} hover:border-gray-500 transition-all duration-300 group cursor-pointer`}
     >
-      <div
-        onClick={() => (window.location.href = `/giveaway/${giveaway.id}`)}
-        className="block"
-      >
+      <Link href={`/giveaway/${giveaway.id}`} className="block">
         <div className="relative overflow-hidden aspect-video">
           <img
             src={giveaway.image || giveaway.thumbnail}
@@ -120,7 +118,7 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
             </span>
           </div>
         </div>
-      </div>
+      </Link>
 
       {/* Claim button positioned normally but with event handling to prevent card navigation */}
       <div className="px-4 pb-4">
