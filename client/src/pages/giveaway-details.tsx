@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/8bit/button";
+import { Frame } from "@/components/ui/8bit/frame";
 import { ArrowLeft, ExternalLink, Calendar, Users, Tag } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -42,7 +43,7 @@ export default function GiveawayDetails() {
         <div className="mb-8">
           <Link href="/">
             <Button 
-              className="flex items-center gap-2 bg-dark-secondary border border-gray-600 text-white hover:bg-gray-700 retro-button"
+              className="flex items-center gap-2 bg-dark-secondary text-white hover:bg-gray-700"
               data-testid="button-back"
             >
               <ArrowLeft size={16} />
@@ -75,34 +76,36 @@ export default function GiveawayDetails() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Image Section */}
             <div className="space-y-4">
-              <div className="relative">
-                <img 
-                  src={giveaway.image || giveaway.thumbnail}
-                  alt={giveaway.title}
-                  className="w-full rounded-none border border-gray-600"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = 'https://via.placeholder.com/600x400/1a1a1a/ffffff?text=No+Image';
-                  }}
-                  data-testid="giveaway-image"
-                />
-                <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
-                  {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
-                    <div className="bg-gray-600 text-white px-3 py-2 text-sm line-through">
-                      {giveaway.worth}
+              <Frame className="bg-black">
+                <div className="relative">
+                  <img 
+                    src={giveaway.image || giveaway.thumbnail}
+                    alt={giveaway.title}
+                    className="w-full rounded-none"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = 'https://via.placeholder.com/600x400/1a1a1a/ffffff?text=No+Image';
+                    }}
+                    data-testid="giveaway-image"
+                  />
+                  <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
+                    {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
+                      <div className="bg-gray-600 text-white px-3 py-2 text-sm line-through">
+                        {giveaway.worth}
+                      </div>
+                    )}
+                    <div className="bg-green-500 text-white px-3 py-2 text-lg font-bold">
+                      FREE
                     </div>
-                  )}
-                  <div className="bg-green-500 text-white px-3 py-2 text-lg font-bold">
-                    FREE
                   </div>
                 </div>
-              </div>
+              </Frame>
 
               {/* Quick Actions */}
               <div className="flex gap-4">
                 <Button
                   onClick={handleClaimClick}
-                  className="flex-1 bg-gray-700 text-white hover:bg-gray-600 text-sm py-3 retro-button"
+                  className="flex-1 bg-gray-700 text-white hover:bg-gray-600 text-sm py-3"
                   data-testid="button-claim-main"
                 >
                   <ExternalLink size={16} className="mr-2" />
@@ -112,7 +115,7 @@ export default function GiveawayDetails() {
                 {giveaway.gamerpower_url && (
                   <Button
                     onClick={() => window.open(giveaway.gamerpower_url, '_blank', 'noopener,noreferrer')}
-                    className="border border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white retro-button text-sm py-3"
+                    className="text-gray-300 bg-transparent hover:bg-gray-700 hover:text-white text-sm py-3"
                     data-testid="button-view-more"
                   >
                     VIEW MORE
@@ -130,7 +133,7 @@ export default function GiveawayDetails() {
                 
                 {/* Price Section */}
                 {giveaway.worth !== "N/A" && giveaway.worth !== "$0.00" && (
-                  <div className="bg-dark-secondary border border-gray-600 p-4 mb-6 text-center">
+                  <Frame className="bg-dark-secondary p-4 mb-6 text-center">
                     <div className="text-gray-300 text-xs mb-2">ORIGINAL PRICE</div>
                     <div className="flex items-center justify-center gap-4">
                       <div className="text-gray-400 text-xl line-through" data-testid="original-price">
@@ -140,28 +143,28 @@ export default function GiveawayDetails() {
                         FREE
                       </div>
                     </div>
-                  </div>
+                  </Frame>
                 )}
 
                 {/* Meta Information */}
                 <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                  <Frame className="bg-dark-secondary p-3">
                     <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <Tag size={14} />
                       <span className="text-xs">TYPE</span>
                     </div>
                     <div className="text-white text-sm" data-testid="giveaway-type">{giveaway.type}</div>
-                  </div>
+                  </Frame>
                   
-                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                  <Frame className="bg-dark-secondary p-3">
                     <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <Users size={14} />
                       <span className="text-xs">USERS</span>
                     </div>
                     <div className="text-white text-sm" data-testid="giveaway-users">{giveaway.users.toLocaleString()}</div>
-                  </div>
+                  </Frame>
                   
-                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                  <Frame className="bg-dark-secondary p-3">
                     <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <Calendar size={14} />
                       <span className="text-xs">PUBLISHED</span>
@@ -169,18 +172,18 @@ export default function GiveawayDetails() {
                     <div className="text-white text-xs" data-testid="giveaway-published">
                       {formatDate(giveaway.published_date)}
                     </div>
-                  </div>
+                  </Frame>
                   
-                  <div className="bg-dark-secondary border border-gray-600 p-3">
+                  <Frame className="bg-dark-secondary p-3">
                     <div className="flex items-center gap-2 text-gray-300 mb-1">
                       <span className="text-xs">PLATFORMS</span>
                     </div>
                     <div className="text-white text-xs" data-testid="giveaway-platforms">{giveaway.platforms}</div>
-                  </div>
+                  </Frame>
                 </div>
                 
                 {giveaway.end_date && giveaway.end_date !== "N/A" && (
-                  <div className="bg-red-900 border border-red-700 p-3 mb-6">
+                  <Frame className="bg-red-900 p-3 mb-6">
                     <div className="flex items-center gap-2 text-white mb-1">
                       <Calendar size={14} />
                       <span className="text-xs">EXPIRES</span>
@@ -188,32 +191,34 @@ export default function GiveawayDetails() {
                     <div className="text-white text-sm" data-testid="giveaway-end-date">
                       {formatDate(giveaway.end_date)}
                     </div>
-                  </div>
+                  </Frame>
                 )}
               </div>
 
               {/* Description */}
               <div>
                 <h2 className="text-white text-lg mb-3">DESCRIPTION</h2>
-                <p className="text-gray-300 text-sm leading-relaxed" data-testid="giveaway-description">
-                  {giveaway.description}
-                </p>
+                <Frame className="bg-dark-secondary p-4">
+                  <p className="text-gray-300 text-sm leading-relaxed" data-testid="giveaway-description">
+                    {giveaway.description}
+                  </p>
+                </Frame>
               </div>
 
               {/* Instructions */}
               {giveaway.instructions && (
                 <div>
                   <h2 className="text-white text-lg mb-3">HOW TO CLAIM</h2>
-                  <div className="bg-dark-secondary border border-gray-600 p-4">
+                  <Frame className="bg-dark-secondary p-4">
                     <p className="text-gray-300 text-sm leading-relaxed" data-testid="giveaway-instructions">
                       {giveaway.instructions}
                     </p>
-                  </div>
+                  </Frame>
                 </div>
               )}
 
               {/* Status */}
-              <div className="bg-dark-secondary border border-gray-600 p-4">
+              <Frame className="bg-dark-secondary p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-gray-300 text-sm">STATUS</span>
                   <span 
@@ -225,7 +230,7 @@ export default function GiveawayDetails() {
                     {giveaway.status.toUpperCase()}
                   </span>
                 </div>
-              </div>
+              </Frame>
             </div>
           </div>
         )}

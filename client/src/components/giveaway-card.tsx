@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/8bit/button";
+import { Frame } from "@/components/ui/8bit/frame";
 import type { Giveaway } from "@shared/schema";
 
 interface GiveawayCardProps {
@@ -60,10 +61,9 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
   };
 
   return (
-    <div
-      className={`bg-dark-secondary border ${getBorderColor(giveaway.type)} hover:border-gray-500 transition-all duration-300 group cursor-pointer`}
-    >
-      <Link href={`/giveaway/${giveaway.id}`} className="block">
+    <Frame className="group cursor-pointer h-full">
+      <div className="bg-dark-secondary h-full flex flex-col">
+        <Link href={`/giveaway/${giveaway.id}`} className="block flex-1 flex flex-col">
         <div className="relative overflow-hidden aspect-video">
           <img
             src={giveaway.image || giveaway.thumbnail}
@@ -118,22 +118,23 @@ export default function GiveawayCard({ giveaway }: GiveawayCardProps) {
             </span>
           </div>
         </div>
-      </Link>
+        </Link>
 
-      {/* Claim button positioned normally but with event handling to prevent card navigation */}
-      <div className="px-4 pb-4">
-        <Button
-          className={`w-full py-2 px-4 transition-colors retro-button text-xs ${getButtonColor(giveaway.type)}`}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleClaimClick();
-          }}
-          data-testid={`button-claim-${giveaway.id}`}
-        >
-          {giveaway.type.toLowerCase() === "beta" ? "JOIN BETA" : "CLAIM NOW"}
-        </Button>
+        {/* Claim button positioned normally but with event handling to prevent card navigation */}
+        <div className="px-4 pb-4 mt-auto">
+          <Button
+            className={`w-full py-2 px-4 transition-colors retro-button text-xs ${getButtonColor(giveaway.type)}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleClaimClick();
+            }}
+            data-testid={`button-claim-${giveaway.id}`}
+          >
+            {giveaway.type.toLowerCase() === "beta" ? "JOIN BETA" : "CLAIM NOW"}
+          </Button>
+        </div>
       </div>
-    </div>
+    </Frame>
   );
 }

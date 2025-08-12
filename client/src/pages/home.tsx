@@ -49,8 +49,8 @@ export default function Home() {
         {/* Loading State */}
         {isLoading && (
           <div className="text-center py-12" data-testid="loading-state">
-            <div className="inline-block w-16 h-16 border-4 border-neon-green border-t-transparent animate-spin"></div>
-            <p className="text-neon-cyan mt-4">LOADING GIVEAWAYS...</p>
+            <div className="inline-block w-16 h-16 border-4 border-gray-600 border-t-transparent animate-spin"></div>
+            <p className="text-gray-400 mt-4">LOADING GIVEAWAYS...</p>
           </div>
         )}
 
@@ -58,7 +58,7 @@ export default function Home() {
         {error && (
           <div className="text-center py-12" data-testid="error-state">
             <div className="text-game-red text-lg mb-4">⚠️ ERROR</div>
-            <p className="text-neon-cyan">
+            <p className="text-gray-400">
               Failed to load giveaways. Please check your connection and try again.
             </p>
             <p className="text-gray-400 text-xs mt-2">

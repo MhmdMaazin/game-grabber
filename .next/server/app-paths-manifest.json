@@ -1,6 +1,16 @@
 {
   "/api/giveaways/route": "app/api/giveaways/route.js",
+  "/api/giveaway/[id]/route": "app/api/giveaway/[id]/route.js",
+  "/api/filter/route": "app/api/filter/route.js",
+  "/api/worth/route": "app/api/worth/route.js",
   "/api/stats/route": "app/api/stats/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/apple-icon.png/route": "app/apple-icon.png/route.js",
   "/icon.png/route": "app/icon.png/route.js",
-  "/page": "app/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/giveaway/[id]/page": "app/giveaway/[id]/page.js",
+  "/about/page": "app/about/page.js",
+  "/page": "app/page.js",
+  "/trending/page": "app/trending/page.js"
 }

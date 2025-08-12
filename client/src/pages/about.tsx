@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Frame } from "@/components/ui/8bit/frame";
 import { Info, Gamepad2, Shield, Zap, Globe, Heart } from "lucide-react";
 import pixelPassLogo from "@assets/pixel_pass_logo_1754551439357.png";
 import Image from "next/image";
@@ -35,25 +36,28 @@ export default function About() {
         </div>
 
         {/* Mission Statement */}
-        <Card className="bg-dark-secondary border-gray-600 mb-8">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <Heart className="w-5 h-5 text-red-500" />
-              OUR MISSION
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-300 leading-relaxed">
-              At Game Grabber, we believe gaming should be accessible to everyone. Our mission is to help gamers discover 
-              amazing free content, from full games to exclusive DLC and beta access. We aggregate giveaways from 
-              trusted platforms like Steam, Epic Games Store, GOG, and more, bringing you the best deals in one place.
-            </p>
-          </CardContent>
-        </Card>
+        <Frame className="bg-dark-secondary mb-8">
+          <Card className="bg-transparent border-0">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Heart className="w-5 h-5 text-red-500" />
+                OUR MISSION
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-300 leading-relaxed">
+                At Game Grabber, we believe gaming should be accessible to everyone. Our mission is to help gamers discover 
+                amazing free content, from full games to exclusive DLC and beta access. We aggregate giveaways from 
+                trusted platforms like Steam, Epic Games Store, GOG, and more, bringing you the best deals in one place.
+              </p>
+            </CardContent>
+          </Card>
+        </Frame>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          <Card className="bg-dark-secondary border-gray-600">
+          <Frame className="bg-dark-secondary">
+          <Card className="bg-transparent border-0">
             <CardHeader>
               <CardTitle className="text-white text-lg flex items-center gap-2">
                 <Zap className="w-5 h-5 text-yellow-500" />
@@ -67,8 +71,10 @@ export default function About() {
               </p>
             </CardContent>
           </Card>
+          </Frame>
 
-          <Card className="bg-dark-secondary border-gray-600">
+          <Frame className="bg-dark-secondary">
+          <Card className="bg-transparent border-0">
             <CardHeader>
               <CardTitle className="text-white text-lg flex items-center gap-2">
                 <Globe className="w-5 h-5 text-blue-500" />
@@ -82,8 +88,10 @@ export default function About() {
               </p>
             </CardContent>
           </Card>
+          </Frame>
 
-          <Card className="bg-dark-secondary border-gray-600">
+          <Frame className="bg-dark-secondary">
+          <Card className="bg-transparent border-0">
             <CardHeader>
               <CardTitle className="text-white text-lg flex items-center gap-2">
                 <Shield className="w-5 h-5 text-green-500" />
@@ -97,10 +105,12 @@ export default function About() {
               </p>
             </CardContent>
           </Card>
+          </Frame>
         </div>
 
         {/* Statistics */}
-        <Card className="bg-dark-secondary border-gray-600 mb-8">
+        <Frame className="bg-dark-secondary mb-8">
+        <Card className="bg-transparent border-0">
           <CardHeader>
             <CardTitle className="text-white flex items-center gap-2">
               <Gamepad2 className="w-5 h-5 text-purple-500" />
@@ -128,9 +138,11 @@ export default function About() {
             </div>
           </CardContent>
         </Card>
+        </Frame>
 
         {/* How It Works */}
-        <Card className="bg-dark-secondary border-gray-600 mb-8">
+        <Frame className="bg-dark-secondary mb-8">
+        <Card className="bg-transparent border-0">
           <CardHeader>
             <CardTitle className="text-white">HOW IT WORKS</CardTitle>
           </CardHeader>
@@ -174,9 +186,11 @@ export default function About() {
             </div>
           </CardContent>
         </Card>
+        </Frame>
 
         {/* Contact/Support */}
-        <Card className="bg-dark-secondary border-gray-600">
+        <Frame className="bg-dark-secondary">
+        <Card className="bg-transparent border-0">
           <CardHeader>
             <CardTitle className="text-white">GET IN TOUCH</CardTitle>
           </CardHeader>
@@ -191,6 +205,7 @@ export default function About() {
             </div>
           </CardContent>
         </Card>
+        </Frame>
       </main>
       
       <Footer />

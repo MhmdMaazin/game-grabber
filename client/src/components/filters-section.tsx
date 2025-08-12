@@ -1,5 +1,7 @@
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+// Use the installed 8bitcn Input
+import { Input } from "@/components/ui/8bit/input";
+// Use 8-bit framed Select trigger
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/8bit/select";
 // Use the installed 8bitcn Button
 import { Button } from "@/components/ui/8bit/button";
 import type { FilterState } from "@/lib/types";
@@ -44,7 +46,6 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
             <label className="block text-white text-xs mb-2">SEARCH GAMES</label>
             <Input
               type="text"
-              className="w-full px-4 py-3 bg-dark-bg border border-gray-600 text-white placeholder-gray-500 focus:border-gray-400 focus:outline-none retro-button text-xs"
               placeholder="Enter game title..."
               value={filters.search}
               onChange={(e) => handleSearchChange(e.target.value)}
@@ -93,7 +94,7 @@ export default function FiltersSection({ filters, onFiltersChange }: FiltersSect
         </div>
 
         {/* Filter Tags */}
-        <div className="flex flex-wrap items-center gap-2 mt-6">
+        <div className="flex flex-wrap items-center gap-4 mt-6">
           <span className="text-gray-300 text-xs whitespace-nowrap">FILTER BY TYPE:</span>
           <Button
             variant="outline"

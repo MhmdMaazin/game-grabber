@@ -16,3 +16,23 @@ button.retro.retro-button-white {
   background-color: #716f6f !important;
   color: #000000 !important;
 }
+
+/* 8-bit input rails accents to better match screenshot */
+.bit-input {
+  position: relative;
+}
+.bit-input::before,
+.bit-input::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: #9ca3af; /* gray-400 */
+}
+.bit-input::before {
+  top: -2px;
+}
+.bit-input::after {
+  bottom: -2px;
+}

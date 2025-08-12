@@ -5,7 +5,8 @@ import Footer from "../components/footer";
 import GiveawayCard from "../components/giveaway-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TrendingUp, Users, Gift, DollarSign } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/8bit/button";
+import { Frame } from "@/components/ui/8bit/frame";
 
 type Giveaway = {
   id: number;
@@ -69,7 +70,7 @@ export default function Trending() {
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[400px]">
             <div className="text-center">
-              <div className="w-8 h-8 border-2 border-gray-400 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-8 h-8 border-2 border-gray-600 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-gray-400">Loading trending giveaways...</p>
             </div>
           </div>
@@ -97,7 +98,8 @@ export default function Trending() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card className="bg-dark-secondary border-gray-600">
+          <Frame className="bg-dark-secondary">
+          <Card className="bg-transparent border-0">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs flex items-center gap-1">
                 <Gift className="w-3 h-3" />
@@ -108,8 +110,10 @@ export default function Trending() {
               <div className="text-white text-lg font-bold">{stats?.totalGiveaways || 0}</div>
             </CardContent>
           </Card>
+          </Frame>
 
-          <Card className="bg-dark-secondary border-gray-600">
+          <Frame className="bg-dark-secondary">
+          <Card className="bg-transparent border-0">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs flex items-center gap-1">
                 <DollarSign className="w-3 h-3" />
@@ -120,8 +124,10 @@ export default function Trending() {
               <div className="text-green-500 text-lg font-bold">${Math.round(stats?.totalValue || 0)}</div>
             </CardContent>
           </Card>
+          </Frame>
 
-          <Card className="bg-dark-secondary border-gray-600">
+          <Frame className="bg-dark-secondary">
+          <Card className="bg-transparent border-0">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs flex items-center gap-1">
                 <Users className="w-3 h-3" />
@@ -136,8 +142,10 @@ export default function Trending() {
               </div>
             </CardContent>
           </Card>
+          </Frame>
 
-          <Card className="bg-dark-secondary border-gray-600">
+          <Frame className="bg-dark-secondary">
+          <Card className="bg-transparent border-0">
             <CardHeader className="pb-2">
               <CardTitle className="text-gray-400 text-xs">HOT TYPE</CardTitle>
             </CardHeader>
@@ -149,6 +157,7 @@ export default function Trending() {
               </div>
             </CardContent>
           </Card>
+          </Frame>
         </div>
 
         {/* Sort Controls */}

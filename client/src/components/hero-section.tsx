@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Frame } from "@/components/ui/8bit/frame";
 import type { GiveawayStats } from "@/lib/types";
 
 export default function HeroSection() {
@@ -7,7 +8,7 @@ export default function HeroSection() {
   });
 
   return (
-    <section className="bg-dark-bg py-12 relative overflow-hidden border-b border-gray-700">
+    <section className="bg-dark-bg py-12 relative overflow-hidden">
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 opacity-5">
         <div 
@@ -25,30 +26,30 @@ export default function HeroSection() {
         </p>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-          <div className="bg-dark-secondary border border-gray-600 p-4">
+          <Frame className="bg-dark-secondary p-4">
             <div className="text-2xl text-white" data-testid="stat-total">
               {isLoading ? "..." : stats?.totalGiveaways || 0}
             </div>
             <div className="text-xs text-gray-400">ACTIVE</div>
-          </div>
-          <div className="bg-dark-secondary border border-gray-600 p-4">
+          </Frame>
+          <Frame className="bg-dark-secondary p-4">
             <div className="text-2xl text-white" data-testid="stat-value">
               {isLoading ? "..." : `$${Math.round(stats?.totalValue || 0)}`}
             </div>
             <div className="text-xs text-gray-400">VALUE</div>
-          </div>
-          <div className="bg-dark-secondary border border-gray-600 p-4">
+          </Frame>
+          <Frame className="bg-dark-secondary p-4">
             <div className="text-2xl text-white" data-testid="stat-platforms">
               {isLoading ? "..." : stats?.platforms || 0}
             </div>
             <div className="text-xs text-gray-400">PLATFORMS</div>
-          </div>
-          <div className="bg-dark-secondary border border-gray-600 p-4">
+          </Frame>
+          <Frame className="bg-dark-secondary p-4">
             <div className="text-2xl text-white" data-testid="stat-new-today">
               {isLoading ? "..." : stats?.newToday || 0}
             </div>
             <div className="text-xs text-gray-400">NEW TODAY</div>
-          </div>
+          </Frame>
         </div>
       </div>
     </section>
